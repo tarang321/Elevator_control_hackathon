@@ -27,6 +27,7 @@ source:
 - path: elevator/elev_tx.c
 - path: elevator/elev_rx.c
 - path: elevator/elev_parser.c
+- path: elevator/elev_parse_util.c
 - path: elevator/elev_ctrl.c
 tag:
 - hwfilter:ram:20k
@@ -43,6 +44,7 @@ include:
   - path: elev_tx.h
   - path: elev_rx.h
   - path: elev_parser.h
+  - path: elev_parse_util.h
   - path: elev_ctrl.h
 sdk:
   vendor: silabs

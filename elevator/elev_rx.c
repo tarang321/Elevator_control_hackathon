@@ -3,6 +3,7 @@
  * @brief USART0 VCOM bring-up + character-by-character RX ISR
  *******************************************************************************
  * VCOM: PA08 TX / PA09 RX, 115200 8N1. Ping-pong buffers protect ISR vs parser.
+ * Optional: backspace, last-command recall (up-arrow ESC [ A).
  ******************************************************************************/
 #include "elev_rx.h"
 #include "elev_tx.h"
@@ -29,6 +30,12 @@ typedef struct {
   volatile bool complete;
 } elev_cmd_slot_t;
 
+typedef enum {
+  ESC_IDLE = 0,
+  ESC_GOT_ESC,
+  ESC_GOT_BRACKET
+} esc_state_t;
+
 /*******************************************************************************
  ***************************   LOCAL VARIABLES   *******************************
  ******************************************************************************/
@@ -39,6 +46,66 @@ static volatile uint8_t s_ready;      /**< Slot marked complete for parser */
 static volatile bool s_overflow;
 static volatile bool s_saw_cr;
 static TaskHandle_t s_parser;
+
+static char s_last[ELEV_CMD_BUF_LEN];
+static uint16_t s_last_len;
+static esc_state_t s_esc;
+
+/*******************************************************************************
+ *********************   LOCAL FUNCTION PROTOTYPES   ***************************
+ ******************************************************************************/
+
+static void save_last_from_slot(const elev_cmd_slot_t *slot);
+static void echo_bs(BaseType_t *woken);
+static void restore_last_cmd(BaseType_t *woken);
+
+/*******************************************************************************
+ **************************   LOCAL FUNCTIONS   ********************************
+ ******************************************************************************/
+
+static void save_last_from_slot(const elev_cmd_slot_t *slot)
+{
+  uint16_t n = slot->len;
+  if (n >= ELEV_CMD_BUF_LEN) {
+    n = (uint16_t)(ELEV_CMD_BUF_LEN - 1U);
+  }
+  for (uint16_t i = 0; i < n; i++) {
+    s_last[i] = slot->buf[i];
+  }
+  s_last[n] = '\0';
+  s_last_len = n;
+}
+
+static void echo_bs(BaseType_t *woken)
+{
+  (void)elev_tx_enqueue_echo_from_isr((uint8_t)'\b', woken);
+  (void)elev_tx_enqueue_echo_from_isr((uint8_t)' ', woken);
+  (void)elev_tx_enqueue_echo_from_isr((uint8_t)'\b', woken);
+}
+
+static void restore_last_cmd(BaseType_t *woken)
+{
+  elev_cmd_slot_t *slot = &s_slot[s_fill];
+  uint16_t i;
+
+  if (s_last_len == 0U) {
+    return;
+  }
+  if (slot->complete) {
+    return;
+  }
+
+  while (slot->len > 0U) {
+    slot->len--;
+    echo_bs(woken);
+  }
+
+  for (i = 0; i < s_last_len; i++) {
+    slot->buf[i] = s_last[i];
+    (void)elev_tx_enqueue_echo_from_isr((uint8_t)s_last[i], woken);
+  }
+  slot->len = s_last_len;
+}
 
 /*******************************************************************************
  **************************   GLOBAL FUNCTIONS   *******************************
@@ -76,6 +143,9 @@ void elev_rx_init(TaskHandle_t parser_task)
   s_ready = 0;
   s_overflow = false;
   s_saw_cr = false;
+  s_esc = ESC_IDLE;
+  s_last_len = 0;
+  s_last[0] = '\0';
   s_slot[0].len = 0;
   s_slot[0].complete = false;
   s_slot[1].len = 0;
@@ -149,6 +219,27 @@ void USART0_RX_IRQHandler(void)
   c = (uint8_t)USART_RxDataGet(USART0);
   USART_IntClear(USART0, USART_IF_RXDATAV);
 
+  /* ESC [ A — up-arrow recall last command */
+  if (s_esc == ESC_GOT_ESC) {
+    s_esc = (c == (uint8_t)'[') ? ESC_GOT_BRACKET : ESC_IDLE;
+    portYIELD_FROM_ISR(woken);
+    return;
+  }
+  if (s_esc == ESC_GOT_BRACKET) {
+    s_esc = ESC_IDLE;
+    if (c == (uint8_t)'A') {
+      restore_last_cmd(&woken);
+    }
+    portYIELD_FROM_ISR(woken);
+    return;
+  }
+  if (c == 0x1BU) {
+    s_esc = ESC_GOT_ESC;
+    portYIELD_FROM_ISR(woken);
+    return;
+  }
+  s_esc = ESC_IDLE;
+
   /* Treat \r\n as a single end-of-line. */
   if ((c == (uint8_t)'\n') && s_saw_cr) {
     s_saw_cr = false;
@@ -160,6 +251,8 @@ void USART0_RX_IRQHandler(void)
     CORE_DECLARE_IRQ_STATE;
 
     slot = &s_slot[s_fill];
+    save_last_from_slot(slot);
+
     CORE_ENTER_ATOMIC();
     slot->complete = true;
     s_ready = s_fill;
@@ -179,8 +272,22 @@ void USART0_RX_IRQHandler(void)
     return;
   }
 
+  /* Backspace / DEL */
+  if ((c == (uint8_t)'\b') || (c == 0x7FU)) {
+    slot = &s_slot[s_fill];
+    if (!slot->complete && (slot->len > 0U)) {
+      slot->len--;
+      echo_bs(&woken);
+    }
+    portYIELD_FROM_ISR(woken);
+    return;
+  }
+
   if ((c >= 0x20U) && (c <= 0x7EU)) {
     (void)elev_tx_enqueue_echo_from_isr(c, &woken);
+  } else {
+    portYIELD_FROM_ISR(woken);
+    return;
   }
 
   slot = &s_slot[s_fill];

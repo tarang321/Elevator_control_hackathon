@@ -94,6 +94,7 @@ add_library(slc OBJECT
     "../elevator/elev_tx.c"
     "../elevator/elev_rx.c"
     "../elevator/elev_parser.c"
+    "../elevator/elev_parse_util.c"
     "../elevator/elev_ctrl.c"
     "../autogen/sl_board_default_init.c"
     "../autogen/sl_dma_manager_instances.c"

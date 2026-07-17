@@ -1,22 +1,22 @@
 /***************************************************************************//**
  * @file elev_gpio.c
- * @brief GPIO instrumentation for ISR / task / semaphore / DMA visibility
+ * @brief GPIO instrumentation + BRD4187C onboard LEDs / buttons
  *******************************************************************************
- * Map (placeholders — see docs/ARCHITECTURE.md):
- *   PC00 pulse  RX ISR active
- *   PC01 pulse  Command complete (EOL)
- *   PC02 level  Parser task active
- *   PC03 level  Elevator task active
- *   PC04 level  Entry blocked (waitQ non-empty)
- *   PC05 pulse  Semaphore give
- *   PC06 pulse  Semaphore take
- *   PC07 level  LDMA TX active
- *   PD02 pulse  LDMA TX complete
+ * Instrumentation (unchanged):
+ *   PC00–PC07, PD02 — logic-analyzer signals
+ *
+ * Onboard UI (UG526 / BRD4187C):
+ *   PB02 LED0  — capacity available (active-high)
+ *   PB04 LED1  — full solid / deferred blink (active-high)
+ *   PB01 BTN0  — exit 1 (active-low, RC debounced on board)
+ *   PB03 BTN1  — enter 1 (active-low)
  ******************************************************************************/
 #include "elev_gpio.h"
 
 #include "sl_gpio.h"
 #include "sl_clock_manager.h"
+#include "sl_simple_led_instances.h"
+#include "sl_led.h"
 
 /*******************************************************************************
  ***************************   LOCAL VARIABLES   *******************************
@@ -32,12 +32,37 @@ static const sl_gpio_t pin_sem_take   = { .port = SL_GPIO_PORT_C, .pin = 6 };
 static const sl_gpio_t pin_dma_active = { .port = SL_GPIO_PORT_C, .pin = 7 };
 static const sl_gpio_t pin_dma_done   = { .port = SL_GPIO_PORT_D, .pin = 2 };
 
+/* Onboard LED1 (LED0 uses sl_led_led0 on PB02). */
+static const sl_gpio_t pin_led1       = { .port = SL_GPIO_PORT_B, .pin = 4 };
+static const sl_gpio_t pin_btn0       = { .port = SL_GPIO_PORT_B, .pin = 1 };
+static const sl_gpio_t pin_btn1       = { .port = SL_GPIO_PORT_B, .pin = 3 };
+
+static bool s_led_available;
+static bool s_led_full;
+static bool s_led_blocked;
+static uint8_t s_blink_div;
+static bool s_led1_phase;
+
+typedef struct {
+  bool stable_down;
+  uint8_t debounce;
+  bool armed;
+} btn_state_t;
+
+static btn_state_t s_btn0;
+static btn_state_t s_btn1;
+
 /*******************************************************************************
  *********************   LOCAL FUNCTION PROTOTYPES   ***************************
  ******************************************************************************/
 
 static void cfg_out(const sl_gpio_t *g);
 static void pulse(const sl_gpio_t *g);
+static void apply_leds(void);
+static bool btn_read_down(const sl_gpio_t *pin);
+static elev_btn_id_t btn_poll_one(btn_state_t *st,
+                                  const sl_gpio_t *pin,
+                                  elev_btn_id_t id);
 
 /*******************************************************************************
  **************************   LOCAL FUNCTIONS   ********************************
@@ -52,6 +77,61 @@ static void pulse(const sl_gpio_t *g)
 {
   sl_gpio_set_pin(g);
   sl_gpio_clear_pin(g);
+}
+
+static void apply_leds(void)
+{
+  if (s_led_available) {
+    sl_led_turn_on(&sl_led_led0);
+  } else {
+    sl_led_turn_off(&sl_led_led0);
+  }
+
+  if (s_led_blocked) {
+    if (s_led1_phase) {
+      sl_gpio_set_pin(&pin_led1);
+    } else {
+      sl_gpio_clear_pin(&pin_led1);
+    }
+  } else if (s_led_full) {
+    sl_gpio_set_pin(&pin_led1);
+  } else {
+    sl_gpio_clear_pin(&pin_led1);
+  }
+}
+
+static bool btn_read_down(const sl_gpio_t *pin)
+{
+  bool pin_high = true;
+  (void)sl_gpio_get_pin_input(pin, &pin_high);
+  return !pin_high;
+}
+
+static elev_btn_id_t btn_poll_one(btn_state_t *st,
+                                  const sl_gpio_t *pin,
+                                  elev_btn_id_t id)
+{
+  bool down = btn_read_down(pin);
+
+  if (down == st->stable_down) {
+    st->debounce = 0;
+    return ELEV_BTN_NONE;
+  }
+
+  if (++st->debounce < 1U) {
+    return ELEV_BTN_NONE;
+  }
+
+  st->stable_down = down;
+  st->debounce = 0;
+  if (down && st->armed) {
+    st->armed = false;
+    return id;
+  }
+  if (!down) {
+    st->armed = true;
+  }
+  return ELEV_BTN_NONE;
 }
 
 /*******************************************************************************
@@ -70,6 +150,17 @@ void elev_gpio_init(void)
   cfg_out(&pin_sem_take);
   cfg_out(&pin_dma_active);
   cfg_out(&pin_dma_done);
+
+  cfg_out(&pin_led1);
+  sl_led_init(&sl_led_led0);
+  s_led_available = true;
+  s_led_full = false;
+  s_led_blocked = false;
+  s_blink_div = 0;
+  s_led1_phase = true;
+  apply_leds();
+
+  elev_gpio_btn_init();
 }
 
 void elev_gpio_rx_isr_pulse(void)
@@ -131,4 +222,52 @@ void elev_gpio_dma_active_set(bool active)
 void elev_gpio_dma_complete_pulse(void)
 {
   pulse(&pin_dma_done);
+}
+
+void elev_gpio_led_update(bool available, bool full, bool blocked)
+{
+  s_led_available = available;
+  s_led_full = full;
+  s_led_blocked = blocked;
+  if (!blocked) {
+    s_led1_phase = true;
+    s_blink_div = 0;
+  }
+  apply_leds();
+}
+
+void elev_gpio_led_blink_tick(void)
+{
+  if (!s_led_blocked) {
+    return;
+  }
+  if (++s_blink_div < 5U) {
+    return;
+  }
+  s_blink_div = 0;
+  s_led1_phase = !s_led1_phase;
+  apply_leds();
+}
+
+void elev_gpio_btn_init(void)
+{
+  sl_gpio_set_pin_mode(&pin_btn0, SL_GPIO_MODE_INPUT_PULL, 1);
+  sl_gpio_set_pin_mode(&pin_btn1, SL_GPIO_MODE_INPUT_PULL, 1);
+  s_btn0.stable_down = false;
+  s_btn0.debounce = 0;
+  s_btn0.armed = true;
+  s_btn1.stable_down = false;
+  s_btn1.debounce = 0;
+  s_btn1.armed = true;
+}
+
+elev_btn_id_t elev_gpio_btn_poll(void)
+{
+  elev_btn_id_t hit;
+
+  hit = btn_poll_one(&s_btn0, &pin_btn0, ELEV_BTN0);
+  if (hit != ELEV_BTN_NONE) {
+    return hit;
+  }
+  return btn_poll_one(&s_btn1, &pin_btn1, ELEV_BTN1);
 }

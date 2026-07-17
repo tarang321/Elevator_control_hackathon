@@ -1,0 +1,5 @@
+<!--Weight Scale Feature-->
+    <characteristic const="false" id="weight_scale_feature" name="Weight Scale Feature" sourceId="org.bluetooth.characteristic.weight_scale_feature" uuid="2A9E">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

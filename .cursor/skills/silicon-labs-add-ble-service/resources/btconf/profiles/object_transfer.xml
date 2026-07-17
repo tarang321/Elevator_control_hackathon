@@ -1,0 +1,108 @@
+<!--Object Transfer-->
+<gatt>
+
+  <!--Object Transfer Service-->
+  <service advertise="false" id="object_transfer" name="Object Transfer Service" requirement="mandatory" sourceId="org.bluetooth.service.object_transfer" type="primary" uuid="1825">
+    <informativeText>Abstract: This service provides management and control features supporting bulk data transfers which occur via a separate L2CAP connection oriented channel. The Client is enabled to create and delete objects and to execute an action using the currently selected object. The selected object can be written, updated or read via an Object Transfer Channel opened by the Client. The generation of a checksum covering a part or the whole of the object contents is included as an optional feature. This service provides a general method for a Client to select and initiate the transfer of any type of object.
+Summary: .</informativeText>
+
+    <!--OTS Feature-->
+    <characteristic const="false" id="ots_feature" name="OTS Feature" sourceId="org.bluetooth.characteristic.ots_feature" uuid="2ABD">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object Name-->
+    <characteristic const="false" id="object_name" name="Object Name" sourceId="org.bluetooth.characteristic.object_name" uuid="2ABE">
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object Type-->
+    <characteristic const="false" id="object_type" name="Object Type" sourceId="org.bluetooth.characteristic.object_type" uuid="2ABF">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object Size-->
+    <characteristic const="false" id="object_size" name="Object Size" sourceId="org.bluetooth.characteristic.object_size" uuid="2AC0">
+      <value length="8" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object First-Created-->
+    <characteristic const="false" id="object_first_created" name="Object First-Created" sourceId="org.bluetooth.characteristic.object_first_created" uuid="2AC1">
+      <value length="7" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object Last-Modified-->
+    <characteristic const="false" id="object_last_modified" name="Object Last-Modified" sourceId="org.bluetooth.characteristic.object_last_modified" uuid="2AC2">
+      <value length="7" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object ID-->
+    <characteristic const="false" id="object_id" name="Object ID" sourceId="org.bluetooth.characteristic.object_id" uuid="2AC3">
+      <value length="6" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object Properties-->
+    <characteristic const="false" id="object_properties" name="Object Properties" sourceId="org.bluetooth.characteristic.object_properties" uuid="2AC4">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object Action Control Point-->
+    <characteristic const="false" id="object_action_control_point" name="Object Action Control Point" sourceId="org.bluetooth.characteristic.object_action_control_point" uuid="2AC5">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object List Control Point-->
+    <characteristic const="false" id="object_list_control_point" name="Object List Control Point" sourceId="org.bluetooth.characteristic.object_list_control_point" uuid="2AC6">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object List Filter-->
+    <characteristic const="false" id="object_list_filter" name="Object List Filter" sourceId="org.bluetooth.characteristic.object_list_filter" uuid="2AC7">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Object Changed-->
+    <characteristic const="false" id="object_changed" name="Object Changed" sourceId="org.bluetooth.characteristic.object_changed" uuid="2AC8">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

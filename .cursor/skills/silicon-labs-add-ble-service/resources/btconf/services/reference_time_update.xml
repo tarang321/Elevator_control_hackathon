@@ -1,0 +1,25 @@
+<!--Reference Time Update Service-->
+<gatt>
+
+  <!--Reference Time Update Service-->
+  <service advertise="false" id="reference_time_update" name="Reference Time Update Service" requirement="mandatory" sourceId="org.bluetooth.service.reference_time_update" type="primary" uuid="1806">
+    <informativeText>Abstract: This service defines how a client can request an update from a reference time source from a time server using the Generic Attribute Profile (GATT)
+Summary: This service enables a Bluetooth device that can update the system time using reference time such as GPS to expose the control point and the accuracy (drift) of the local system time compared to the reference time source.</informativeText>
+
+    <!--Time Update Control Point-->
+    <characteristic const="false" id="time_update_control_point" name="Time Update Control Point" sourceId="org.bluetooth.characteristic.time_update_control_point" uuid="2A16">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Time Update State-->
+    <characteristic const="false" id="time_update_state" name="Time Update State" sourceId="org.bluetooth.characteristic.time_update_state" uuid="2A17">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

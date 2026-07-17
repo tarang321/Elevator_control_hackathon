@@ -1,0 +1,11 @@
+<!--Ringer Setting-->
+    <characteristic const="false" id="ringer_setting" name="Ringer Setting" sourceId="org.bluetooth.characteristic.ringer_setting" uuid="2A41">
+      <informativeText>Abstract:             
+        The Ringer Setting characteristic defines the Setting of the Ringer.
+            Value 0, meaning "Ringer Silent"
+            Value 1, meaning "Ringer Normal"
+		
+Examples: The value 0x01 shall be interpreted as "Ringer Normal"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

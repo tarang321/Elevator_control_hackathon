@@ -1,0 +1,8 @@
+<!--Unread Alert Status-->
+    <characteristic const="false" id="unread_alert_status" name="Unread Alert Status" sourceId="org.bluetooth.characteristic.unread_alert_status" uuid="2A45">
+      <informativeText>Abstract: This characteristic shows how many numbers of unread alerts exist in the specific category in the device.
+Summary: This characteristic consists of "Category ID" and "uint8" which shows the number of unread alerts/messages.
+Examples: The value 0x01, 0x04 are interpreted that the server has 4 unread messages in Email category.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

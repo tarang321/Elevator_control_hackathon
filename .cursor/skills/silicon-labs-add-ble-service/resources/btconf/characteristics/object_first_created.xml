@@ -1,0 +1,5 @@
+<!--Object First-Created-->
+    <characteristic const="false" id="object_first_created" name="Object First-Created" sourceId="org.bluetooth.characteristic.object_first_created" uuid="2AC1">
+      <value length="7" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,6 @@
+<!--Floor Number-->
+    <characteristic const="false" id="floor_number" name="Floor Number" sourceId="org.bluetooth.characteristic.floor_number" uuid="2AB2">
+      <informativeText>Abstract: The Floor Number characteristic describes in which floor the device is installed.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

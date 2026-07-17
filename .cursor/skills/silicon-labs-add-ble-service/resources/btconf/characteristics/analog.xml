@@ -1,0 +1,7 @@
+<!--Analog-->
+    <characteristic const="false" id="analog" name="Analog" sourceId="org.bluetooth.characteristic.analog" uuid="2A58">
+      <informativeText>
+Summary: The Analog characteristic is used to read or write the value of one of the IO Module's analog signals.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

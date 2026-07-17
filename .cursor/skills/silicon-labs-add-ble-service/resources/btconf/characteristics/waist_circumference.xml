@@ -1,0 +1,6 @@
+<!--Waist Circumference-->
+    <characteristic const="false" id="waist_circumference" name="Waist Circumference" sourceId="org.bluetooth.characteristic.waist_circumference" uuid="2A97">
+      <informativeText>Abstract: Used with the Hip Circumference value to calculate the Waist to Hip Ratio (WHR)</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

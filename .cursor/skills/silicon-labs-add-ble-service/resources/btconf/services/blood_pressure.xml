@@ -1,0 +1,75 @@
+<!--Blood Pressure-->
+<gatt>
+
+  <!--Blood Pressure-->
+  <service advertise="false" id="blood_pressure" name="Blood Pressure" requirement="mandatory" sourceId="org.bluetooth.service.blood_pressure" type="primary" uuid="1810">
+    <informativeText>Abstract: This service exposes blood pressure and other data from a blood pressure monitor intended for healthcare applications.
+Summary: The BLOOD PRESSURE Service exposes blood pressure and other data related to a blood pressure monitor.</informativeText>
+
+    <!--Blood Pressure Measurement-->
+    <characteristic const="false" id="blood_pressure_measurement" name="Blood Pressure Measurement" sourceId="org.bluetooth.characteristic.blood_pressure_measurement" uuid="2A35">
+      <informativeText>Abstract: 
+        The Blood Pressure Measurement characteristic is a variable length structure containing a Flags field, a Blood Pressure Measurement Compound Value field, and contains additional fields such as Time Stamp, Pulse Rate and User ID as determined by the contents of the Flags field.            
+		</informativeText>
+      <value length="25" type="hex" variable_length="false"/>
+      <properties>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Intermediate Cuff Pressure-->
+    <characteristic const="false" id="intermediate_cuff_pressure" name="Intermediate Cuff Pressure" sourceId="org.bluetooth.characteristic.intermediate_cuff_pressure" uuid="2A36">
+      <value length="25" type="hex" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Blood Pressure Feature-->
+    <characteristic const="false" id="blood_pressure_feature" name="Blood Pressure Feature" sourceId="org.bluetooth.characteristic.blood_pressure_feature" uuid="2A49">
+      <informativeText>Abstract: 
+            The Blood Pressure Feature characteristic is used to describe the supported features of the Blood Pressure Sensor.        
+		</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

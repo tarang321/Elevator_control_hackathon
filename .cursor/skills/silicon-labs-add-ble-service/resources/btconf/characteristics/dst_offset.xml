@@ -1,0 +1,5 @@
+<!--DST Offset-->
+    <characteristic const="false" id="dst_offset" name="DST Offset" sourceId="org.bluetooth.characteristic.dst_offset" uuid="2A0D">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

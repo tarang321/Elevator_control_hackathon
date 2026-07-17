@@ -1,0 +1,91 @@
+<!--Proximity-->
+<gatt>
+
+  <!--Link Loss-->
+  <service advertise="false" id="link_loss" name="Link Loss" requirement="mandatory" sourceId="org.bluetooth.service.link_loss" type="primary" uuid="1803">
+    <informativeText>Abstract: This service defines behavior when a link is lost between two devices.
+Summary:             
+    The LINK LOSS Service is instantiated as a Primary Service.
+    There is only one instance of the Link Loss Service on a device.
+    There is only one instance of the Alert Level characteristic in a Link Loss Service.
+    This alert continues until one of following conditions occurs:
+    - An implementation specific timeout
+    - User interaction on this device
+    - A new alert level is written
+    - The physical link is disconnected
+		
+Examples: If the current link loss alert level is "No Alert", no alerting is done on this device. If the current link loss alert level is "Mild Alert", the device alerts. If the current link loss alert level is "High Alert", the device alerts in the strongest possible way.</informativeText>
+
+    <!--Alert Level-->
+    <characteristic const="false" id="alert_level" name="Alert Level" sourceId="org.bluetooth.characteristic.alert_level" uuid="2A06">
+      <informativeText>Abstract: The level of an alert a device is to sound. If this level is changed while the alert is being sounded, the new level should take effect.
+Summary:             
+    The value of the characteristic shall be an unsigned 8 bit integer that has a fixed point exponent of 0.
+    The Alert Level characteristic defines the level of alert, and is one of the following three values:
+    - Value 0, meaning "No Alert"
+    - Value 1, meaning "Mild Alert"
+    - Value 2, meaning "High Alert"
+    
+Examples: The value 0x01 is interpreted as "Mild Alert"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <!--Immediate Alert-->
+  <service advertise="false" id="immediate_alert" name="Immediate Alert" requirement="mandatory" sourceId="org.bluetooth.service.immediate_alert" type="primary" uuid="1802">
+    <informativeText>Abstract: This service exposes a control point to allow a peer device to cause the device to immediately alert.
+Summary: 
+    The Immediate Alert service is instantiated as a Primary Service.
+    There is only one instance of the Immediate Alert service on a device.
+    There is only one instance of the Alert Level characteristic in an Immediate Alert service.
+    This alert continues until one of following conditions occurs:
+    - An implementation specific timeout
+    - User interaction on this device
+    - A new alert level is written
+    - The physical link is disconnected
+		
+Examples: If the written alert level is "No Alert", no alerting is done on this device. If the written alert level is "Mild Alert", the device alerts. If the written alert level is "High Alert", the device alerts in the strongest possible way.</informativeText>
+
+    <!--Alert Level-->
+    <characteristic const="false" id="alert_level" name="Alert Level" sourceId="org.bluetooth.characteristic.alert_level" uuid="2A06">
+      <informativeText>Abstract: The level of an alert a device is to sound. If this level is changed while the alert is being sounded, the new level should take effect.
+Summary:             
+    The value of the characteristic shall be an unsigned 8 bit integer that has a fixed point exponent of 0.
+    The Alert Level characteristic defines the level of alert, and is one of the following three values:
+    - Value 0, meaning "No Alert"
+    - Value 1, meaning "Mild Alert"
+    - Value 2, meaning "High Alert"
+    
+Examples: The value 0x01 is interpreted as "Mild Alert"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <!--Tx Power-->
+  <service advertise="false" id="tx_power" name="Tx Power" requirement="mandatory" sourceId="org.bluetooth.service.tx_power" type="primary" uuid="1804">
+    <informativeText>Abstract: This service exposes a device's current transmit power level when in a connection.
+Summary: The Tx Power service is instantiated as a Primary Service. There is only one instance of the Tx Power service on a device. There is exactly one instance of the Tx Power Level characteristic</informativeText>
+
+    <!--Tx Power Level-->
+    <characteristic const="false" id="tx_power_level" name="Tx Power Level" sourceId="org.bluetooth.characteristic.tx_power_level" uuid="2A07">
+      <informativeText>Abstract: 
+      The Transmit Power Level characteristic represents the current transmit power level in dBm, and the level ranges from -100 dBm to +20 dBm to a resolution of 1 dBm.            
+		
+Summary: 
+    The value of the characteristic is a signed 8 bit integer that has a fixed point exponent of 0.            
+		
+Examples: The value 0x12 is interpreted as +18dBm The value 0xEE is interpreted as -18dBm</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

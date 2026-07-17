@@ -1,0 +1,46 @@
+<!--Transport Discovery-->
+<gatt>
+
+  <!--Transport Discovery-->
+  <service advertise="false" id="transport_discovery" name="Transport Discovery" requirement="mandatory" sourceId="org.bluetooth.service.transport_discovery" type="primary" uuid="1824">
+    <informativeText>Abstract: 
+        This service enables a device using Bluetooth low energy wireless technology to expose services that are available on a transport other than Bluetooth low energy. 
+        When used together with a higher level specification (e.g., a specification which references and makes use of TDS), the information provided by this service can be 
+        used to facilitate discovery and utilization of BR/EDR or transports not defined by the Bluetooth SIG such as those defined by the Wi-Fi Alliance® or other organizations.
+		
+Summary:             
+            The Transport Discovery Service (TDS) enables a device using Bluetooth low energy wireless technology to expose services that are available on a transport other than Bluetooth low energy.     
+        </informativeText>
+
+    <!--TDS Control Point-->
+    <characteristic const="false" id="tds_control_point" name="TDS Control Point" sourceId="org.bluetooth.characteristic.tds_control_point" uuid="2ABC">
+      <informativeText>
+Summary: 
+         The TDS Control Point characteristic is defined in the Transport Discovery Service, Section 4.1 and its sub-sections.
+		</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

@@ -1,0 +1,11 @@
+<!--Alert Notification Control Point-->
+    <characteristic const="false" id="alert_notification_control_point" name="Alert Notification Control Point" sourceId="org.bluetooth.characteristic.alert_notification_control_point" uuid="2A44">
+      <informativeText>Abstract: Control point of the Alert Notification server.  Client can write the command here to request the several functions toward the server.
+Summary: 
+         The 1st octet value of the characteristic is an unsigned 8 bit integer that has a fixed point exponent of 0.  The 1st octet value expresses the command ID that defines the server's actions.
+		 The 2nd octet value of the characteristic is an "Alert Category ID" format.  This octet shows the target category that the command ID applies for.
+        
+Examples: The data 0x02 0x01 interprets "Disable New Incoming Notification for Email Category".</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

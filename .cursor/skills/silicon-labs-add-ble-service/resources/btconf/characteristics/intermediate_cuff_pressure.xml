@@ -1,0 +1,5 @@
+<!--Intermediate Cuff Pressure-->
+    <characteristic const="false" id="intermediate_cuff_pressure" name="Intermediate Cuff Pressure" sourceId="org.bluetooth.characteristic.intermediate_cuff_pressure" uuid="2A36">
+      <value length="25" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

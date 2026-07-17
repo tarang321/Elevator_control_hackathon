@@ -1,0 +1,6 @@
+<!--First Name-->
+    <characteristic const="false" id="first_name" name="First Name" sourceId="org.bluetooth.characteristic.first_name" uuid="2A8A">
+      <informativeText>Abstract: First name of the user. See Note below.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

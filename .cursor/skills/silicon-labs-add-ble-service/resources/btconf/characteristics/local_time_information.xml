@@ -1,0 +1,5 @@
+<!--Local Time Information-->
+    <characteristic const="false" id="local_time_information" name="Local Time Information" sourceId="org.bluetooth.characteristic.local_time_information" uuid="2A0F">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

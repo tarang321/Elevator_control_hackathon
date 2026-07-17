@@ -1,0 +1,37 @@
+<!--Link Loss-->
+<gatt>
+
+  <!--Link Loss-->
+  <service advertise="false" id="link_loss" name="Link Loss" requirement="mandatory" sourceId="org.bluetooth.service.link_loss" type="primary" uuid="1803">
+    <informativeText>Abstract: This service defines behavior when a link is lost between two devices.
+Summary:             
+    The LINK LOSS Service is instantiated as a Primary Service.
+    There is only one instance of the Link Loss Service on a device.
+    There is only one instance of the Alert Level characteristic in a Link Loss Service.
+    This alert continues until one of following conditions occurs:
+    - An implementation specific timeout
+    - User interaction on this device
+    - A new alert level is written
+    - The physical link is disconnected
+		
+Examples: If the current link loss alert level is "No Alert", no alerting is done on this device. If the current link loss alert level is "Mild Alert", the device alerts. If the current link loss alert level is "High Alert", the device alerts in the strongest possible way.</informativeText>
+
+    <!--Alert Level-->
+    <characteristic const="false" id="alert_level" name="Alert Level" sourceId="org.bluetooth.characteristic.alert_level" uuid="2A06">
+      <informativeText>Abstract: The level of an alert a device is to sound. If this level is changed while the alert is being sounded, the new level should take effect.
+Summary:             
+    The value of the characteristic shall be an unsigned 8 bit integer that has a fixed point exponent of 0.
+    The Alert Level characteristic defines the level of alert, and is one of the following three values:
+    - Value 0, meaning "No Alert"
+    - Value 1, meaning "Mild Alert"
+    - Value 2, meaning "High Alert"
+    
+Examples: The value 0x01 is interpreted as "Mild Alert"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

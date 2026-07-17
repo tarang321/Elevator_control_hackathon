@@ -1,0 +1,11 @@
+<!--Report-->
+    <characteristic const="false" id="report" name="Report" sourceId="org.bluetooth.characteristic.report" uuid="2A4D">
+      <informativeText>Abstract: 
+      The Report characteristic is used to exchange data between a HID Device and a HID Host.
+		
+Summary: 
+      The Report characteristic value contains Input Report, Output Report or Feature Report data to be transferred between the HID Device and HID Host.
+    </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

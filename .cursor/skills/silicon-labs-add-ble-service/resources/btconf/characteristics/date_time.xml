@@ -1,0 +1,11 @@
+<!--Date Time-->
+    <characteristic const="false" id="date_time" name="Date Time" sourceId="org.bluetooth.characteristic.date_time" uuid="2A08">
+      <informativeText>Abstract: 
+            The Date Time characteristic is used to represent time.
+        
+Summary: 
+            The Date Time characteristic contains fields for year, month, day, hours, minutes and seconds. Calendar days in Date Time are represented using Gregorian calendar. Hours in Date Time are represented in the 24h system.
+        </informativeText>
+      <value length="7" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

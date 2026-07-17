@@ -1,0 +1,7 @@
+<!--Bond Management Control Point-->
+    <characteristic const="false" id="bond_management_control_point" name="Bond Management Control Point" sourceId="org.bluetooth.characteristic.bond_management_control_point" uuid="2AA4">
+      <informativeText>Abstract: The Bond Management Service Control Point (BMSCP) encapsulates functionality and mechanisms to control the bonds of a device. 
+Summary: This control point is used with a service to provide BMS specific functionality and the ability to manage bonds on the device. This includes functions like delete the bond information of the current connection or deletion of the whole bond information. The criterion in the Operand field is defined by the service that references this characteristic</informativeText>
+      <value length="1" type="hex" variable_length="true"/>
+      <properties/>
+    </characteristic>

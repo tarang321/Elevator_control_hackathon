@@ -1,0 +1,7 @@
+<!--RSC Measurement-->
+    <characteristic const="false" id="rsc_measurement" name="RSC Measurement" sourceId="org.bluetooth.characteristic.rsc_measurement" uuid="2A53">
+      <informativeText>
+Summary: The RSC Measurement characteristic (RSC refers to Running Speed and Cadence) is a variable length structure containing a Flags field, an Instantaneous Speed field and an Instantaneous Cadence field and, based on the contents of the Flags field, may contain a Stride Length field and a Total Distance field.</informativeText>
+      <value length="10" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

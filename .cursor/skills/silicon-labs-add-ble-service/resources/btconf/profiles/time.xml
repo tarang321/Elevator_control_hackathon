@@ -1,0 +1,88 @@
+<!--Time-->
+<gatt>
+
+  <!--Current Time Service-->
+  <service advertise="false" id="current_time" name="Current Time Service" requirement="mandatory" sourceId="org.bluetooth.service.current_time" type="primary" uuid="1805">
+    <informativeText>Abstract: This service defines how the current time can be exposed using the Generic Attribute Profile (GATT).
+Summary: Many Bluetooth devices have the ability to store and show time information. This service defines how a Bluetooth device can expose time information to other Bluetooth devices.</informativeText>
+
+    <!--Current Time-->
+    <characteristic const="false" id="current_time" name="Current Time" sourceId="org.bluetooth.characteristic.current_time" uuid="2A2B">
+      <value length="10" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Local Time Information-->
+    <characteristic const="false" id="local_time_information" name="Local Time Information" sourceId="org.bluetooth.characteristic.local_time_information" uuid="2A0F">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Reference Time Information-->
+    <characteristic const="false" id="reference_time_information" name="Reference Time Information" sourceId="org.bluetooth.characteristic.reference_time_information" uuid="2A14">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <!--Next DST Change Service-->
+  <service advertise="false" id="next_dst_change" name="Next DST Change Service" requirement="mandatory" sourceId="org.bluetooth.service.next_dst_change" type="primary" uuid="1807">
+    <informativeText>Abstract: This service defines how the information about an upcoming DST change can be exposed using the Generic Attribute Profile (GATT).
+Summary: This service enables a Bluetooth device that has knowledge about the next occurrence of a DST change to expose this information to another Bluetooth device.</informativeText>
+
+    <!--Time with DST-->
+    <characteristic const="false" id="time_with_dst" name="Time with DST" sourceId="org.bluetooth.characteristic.time_with_dst" uuid="2A11">
+      <value length="8" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <!--Reference Time Update Service-->
+  <service advertise="false" id="reference_time_update" name="Reference Time Update Service" requirement="mandatory" sourceId="org.bluetooth.service.reference_time_update" type="primary" uuid="1806">
+    <informativeText>Abstract: This service defines how a client can request an update from a reference time source from a time server using the Generic Attribute Profile (GATT)
+Summary: This service enables a Bluetooth device that can update the system time using reference time such as GPS to expose the control point and the accuracy (drift) of the local system time compared to the reference time source.</informativeText>
+
+    <!--Time Update Control Point-->
+    <characteristic const="false" id="time_update_control_point" name="Time Update Control Point" sourceId="org.bluetooth.characteristic.time_update_control_point" uuid="2A16">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Time Update State-->
+    <characteristic const="false" id="time_update_state" name="Time Update State" sourceId="org.bluetooth.characteristic.time_update_state" uuid="2A17">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

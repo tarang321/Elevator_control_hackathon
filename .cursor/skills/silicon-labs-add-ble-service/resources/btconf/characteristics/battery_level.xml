@@ -1,0 +1,8 @@
+<!--Battery Level-->
+    <characteristic const="false" id="battery_level" name="Battery Level" sourceId="org.bluetooth.characteristic.battery_level" uuid="2A19">
+      <informativeText>Abstract: 
+            The current charge level of a battery. 100% represents fully charged while 0% represents fully discharged.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

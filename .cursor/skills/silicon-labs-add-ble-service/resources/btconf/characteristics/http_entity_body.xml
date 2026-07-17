@@ -1,0 +1,8 @@
+<!--HTTP Entity Body-->
+    <characteristic const="false" id="http_entity_body" name="HTTP Entity Body" sourceId="org.bluetooth.characteristic.http_entity_body" uuid="2AB9">
+      <informativeText>Abstract: 
+            The HTTP Entity Body Characteristic contains the contents of the message body after any Transfer Encoding has been applied.
+        </informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

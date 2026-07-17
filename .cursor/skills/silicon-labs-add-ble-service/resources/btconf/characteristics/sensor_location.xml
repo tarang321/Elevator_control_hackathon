@@ -1,0 +1,9 @@
+<!--Sensor Location-->
+    <characteristic const="false" id="sensor_location" name="Sensor Location" sourceId="org.bluetooth.characteristic.sensor_location" uuid="2A5D">
+      <informativeText>
+Summary: 
+            The Sensor Location characteristic is used to expose the location of the sensor.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

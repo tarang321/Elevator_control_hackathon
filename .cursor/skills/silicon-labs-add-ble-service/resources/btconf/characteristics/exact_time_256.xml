@@ -1,0 +1,5 @@
+<!--Exact Time 256-->
+    <characteristic const="false" id="exact_time_256" name="Exact Time 256" sourceId="org.bluetooth.characteristic.exact_time_256" uuid="2A0C">
+      <value length="9" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

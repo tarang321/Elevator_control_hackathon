@@ -1,0 +1,5 @@
+<!--OTS Feature-->
+    <characteristic const="false" id="ots_feature" name="OTS Feature" sourceId="org.bluetooth.characteristic.ots_feature" uuid="2ABD">
+      <value length="0" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

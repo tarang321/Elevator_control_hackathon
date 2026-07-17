@@ -1,0 +1,5 @@
+<!--Time with DST-->
+    <characteristic const="false" id="time_with_dst" name="Time with DST" sourceId="org.bluetooth.characteristic.time_with_dst" uuid="2A11">
+      <value length="8" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

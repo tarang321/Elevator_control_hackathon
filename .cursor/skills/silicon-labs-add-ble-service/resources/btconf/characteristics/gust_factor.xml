@@ -1,0 +1,5 @@
+<!--Gust Factor-->
+    <characteristic const="false" id="gust_factor" name="Gust Factor" sourceId="org.bluetooth.characteristic.gust_factor" uuid="2A74">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

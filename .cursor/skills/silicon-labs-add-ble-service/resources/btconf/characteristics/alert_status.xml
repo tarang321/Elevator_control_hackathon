@@ -1,0 +1,12 @@
+<!--Alert Status-->
+    <characteristic const="false" id="alert_status" name="Alert Status" sourceId="org.bluetooth.characteristic.alert_status" uuid="2A3F">
+      <informativeText>Abstract:             
+        The Alert Status characteristic defines the Status of alert.
+            - Bit 0, meaning "Ringer State"
+            - Bit 1, meaning "Vibrator State"
+            - Bit 2, meaning "Display Alert Status"
+		
+Examples: Bit 0, 0 meaning "Ringer State" not active, 1 meaning "Ringer State" active Bit 1, 0 meaning "Vibrator State" not active, 1 meaning "Vibrator State" active Bit 2, 0 meaning "Display Alert State" not active, 1 meaning "Display Alert State" active</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

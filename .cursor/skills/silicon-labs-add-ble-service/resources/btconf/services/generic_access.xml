@@ -1,0 +1,52 @@
+<!--Generic Access-->
+<gatt>
+
+  <!--Generic Access-->
+  <service advertise="false" id="generic_access" name="Generic Access" requirement="mandatory" sourceId="org.bluetooth.service.generic_access" type="primary" uuid="1800">
+    <informativeText>Abstract: The generic_access service contains generic information about the device. All available Characteristics are readonly.</informativeText>
+
+    <!--Device Name-->
+    <characteristic const="false" id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Appearance-->
+    <characteristic const="false" id="appearance" name="Appearance" sourceId="org.bluetooth.characteristic.gap.appearance" uuid="2A01">
+      <informativeText>Abstract: 
+            The external appearance of this device. The values are composed of a category (10-bits) and sub-categories (6-bits).
+        </informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Peripheral Privacy Flag-->
+    <characteristic const="false" id="peripheral_privacy_flag" name="Peripheral Privacy Flag" sourceId="org.bluetooth.characteristic.gap.peripheral_privacy_flag" uuid="2A02">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Reconnection Address-->
+    <characteristic const="false" id="reconnection_address" name="Reconnection Address" sourceId="org.bluetooth.characteristic.gap.reconnection_address" uuid="2A03">
+      <informativeText>Abstract: The Information included in this page is informative. The normative descriptions are contained in the applicable specification.</informativeText>
+      <value length="6" type="hex" variable_length="false"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Peripheral Preferred Connection Parameters-->
+    <characteristic const="false" id="peripheral_preferred_connection_parameters" name="Peripheral Preferred Connection Parameters" sourceId="org.bluetooth.characteristic.gap.peripheral_preferred_connection_parameters" uuid="2A04">
+      <value length="8" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

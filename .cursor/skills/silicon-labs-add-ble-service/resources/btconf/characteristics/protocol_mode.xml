@@ -1,0 +1,9 @@
+<!--Protocol Mode-->
+    <characteristic const="false" id="protocol_mode" name="Protocol Mode" sourceId="org.bluetooth.characteristic.protocol_mode" uuid="2A4E">
+      <informativeText>
+Summary: 
+             The Protocol Mode characteristic is used to expose the current protocol mode of the HID Service with which it is associated, or to set the desired protocol mode of the HID Service.
+		</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

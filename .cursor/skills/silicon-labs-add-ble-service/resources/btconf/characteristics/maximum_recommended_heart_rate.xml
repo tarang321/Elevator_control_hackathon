@@ -1,0 +1,6 @@
+<!--Maximum Recommended Heart Rate-->
+    <characteristic const="false" id="maximum_recommended_heart_rate" name="Maximum Recommended Heart Rate" sourceId="org.bluetooth.characteristic.maximum_recommended_heart_rate" uuid="2A91">
+      <informativeText>Abstract: Maximum recommended heart rate is a threshold that may be set to limit exertion. The maximum recommended heart rate is smaller or equal to the maximal heart rate a user can reach.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

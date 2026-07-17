@@ -1,0 +1,7 @@
+<!--Central Address Resolution-->
+    <characteristic const="false" id="central_address_resolution" name="Central Address Resolution" sourceId="org.bluetooth.characteristic.gap.central_address_resolution" uuid="2AA6">
+      <informativeText>
+Summary: The Peripheral checks if the peer device supports address resolution by reading the Central Address Resolution characteristic before using directed advertisement where the initiator address is set to a Resolvable Private Address (RPA).</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

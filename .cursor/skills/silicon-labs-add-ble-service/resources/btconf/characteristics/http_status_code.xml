@@ -1,0 +1,8 @@
+<!--HTTP Status Code-->
+    <characteristic const="false" id="http_status_code" name="HTTP Status Code" sourceId="org.bluetooth.characteristic.http_status_code" uuid="2AB8">
+      <informativeText>Abstract: 
+            The HTTP Status Code characteristic contains the Status-Code from the Status-Line of the first line of the HTTP Response Message, followed by one octet indicating the Data Status Bit Field indicating the status of the data received.
+        </informativeText>
+      <value length="3" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

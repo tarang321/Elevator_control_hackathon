@@ -1,0 +1,6 @@
+<!--Anaerobic Threshold-->
+    <characteristic const="false" id="anaerobic_threshold" name="Anaerobic Threshold" sourceId="org.bluetooth.characteristic.anaerobic_threshold" uuid="2A83">
+      <informativeText>Abstract: Second metabolic threshold</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

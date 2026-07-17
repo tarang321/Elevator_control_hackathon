@@ -1,0 +1,5 @@
+<!--Day of Week-->
+    <characteristic const="false" id="day_of_week" name="Day of Week" sourceId="org.bluetooth.characteristic.day_of_week" uuid="2A09">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

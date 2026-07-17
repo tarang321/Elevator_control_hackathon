@@ -1,0 +1,6 @@
+<!--Value Trigger Setting-->
+      <descriptor const="false" discoverable="true" id="value_trigger_setting" name="Value Trigger Setting" sourceId="org.bluetooth.descriptor.value_trigger_setting" uuid="290A">
+        <informativeText>Abstract: The value of the descriptor has two parts. Part one is a condition field and occupies one octet, and part two is the comparison value (trigger point) that the characteristic value is checked against.</informativeText>
+        <properties/>
+        <value length="8" type="hex" variable_length="false"/>
+      </descriptor>

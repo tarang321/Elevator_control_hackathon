@@ -1,0 +1,5 @@
+<!--Peripheral Privacy Flag-->
+    <characteristic const="false" id="peripheral_privacy_flag" name="Peripheral Privacy Flag" sourceId="org.bluetooth.characteristic.gap.peripheral_privacy_flag" uuid="2A02">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

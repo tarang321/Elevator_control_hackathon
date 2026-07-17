@@ -1,0 +1,14 @@
+<!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties/>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>

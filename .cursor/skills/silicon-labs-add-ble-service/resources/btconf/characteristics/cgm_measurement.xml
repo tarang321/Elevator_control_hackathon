@@ -1,0 +1,7 @@
+<!--CGM Measurement-->
+    <characteristic const="false" id="cgm_measurement" name="CGM Measurement" sourceId="org.bluetooth.characteristic.cgm_measurement" uuid="2AA7">
+      <informativeText>
+Summary: The CGM Measurement characteristic is a variable length structure containing one or more CGM Measurement records, each comprising a Size field, a Flags Field, a Glucose Concentration field, a Time Offset field, a Sensor Status Annunciation field (optional), a CGM Trend Information Field (optional), a CGM Quality Field (optional), and an E2E-CRC Field (mandatory if this feature is supported). </informativeText>
+      <value length="12" type="hex" variable_length="true"/>
+      <properties/>
+    </characteristic>

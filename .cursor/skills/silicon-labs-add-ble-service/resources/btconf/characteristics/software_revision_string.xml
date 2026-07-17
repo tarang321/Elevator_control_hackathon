@@ -1,0 +1,8 @@
+<!--Software Revision String-->
+    <characteristic const="false" id="software_revision_string" name="Software Revision String" sourceId="org.bluetooth.characteristic.software_revision_string" uuid="2A28">
+      <informativeText>Abstract:             
+      The value of this characteristic is a UTF-8 string representing the software revision for the software within the device.
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

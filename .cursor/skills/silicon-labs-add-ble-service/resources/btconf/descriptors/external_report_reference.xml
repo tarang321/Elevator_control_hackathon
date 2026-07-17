@@ -1,0 +1,9 @@
+<!--External Report Reference-->
+      <descriptor const="false" discoverable="true" id="external_report_reference" name="External Report Reference" sourceId="org.bluetooth.descriptor.external_report_reference" uuid="2907">
+        <informativeText>
+Summary: 
+        The External Report Reference characteristic descriptor allows a HID Host to map information from the Report Map characteristic value for Input Report, Output Report or Feature Report data to the Characteristic UUID of external service characteristics used to transfer the associated data.
+	</informativeText>
+        <properties/>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>

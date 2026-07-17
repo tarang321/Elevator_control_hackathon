@@ -1,0 +1,8 @@
+{
+  "name": "silicon-labs-gatt-resources",
+  "private": true,
+  "description": "Export Studio GATT Configurator SIG service fragments for Workflow B.",
+  "scripts": {
+    "export": "node export_from_studio_vendor.cjs"
+  }
+}

@@ -1,0 +1,5 @@
+<!--Wind Chill-->
+    <characteristic const="false" id="wind_chill" name="Wind Chill" sourceId="org.bluetooth.characteristic.wind_chill" uuid="2A79">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

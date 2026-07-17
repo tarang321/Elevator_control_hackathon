@@ -1,0 +1,6 @@
+<!--Time Trigger Setting-->
+      <descriptor const="false" discoverable="true" id="time_trigger_setting" name="Time Trigger Setting" sourceId="org.bluetooth.descriptor.time_trigger_setting" uuid="290E">
+        <informativeText>Abstract: The value of the descriptor has two parts. Part one is a condition field and occupies one octet, and part two is the comparison value (trigger point) that the characteristic value is checked against.</informativeText>
+        <properties/>
+        <value length="7" type="hex" variable_length="false"/>
+      </descriptor>

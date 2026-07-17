@@ -1,0 +1,234 @@
+<!--Indoor Positioning-->
+<gatt>
+
+  <!--Indoor Positioning-->
+  <service advertise="false" id="indoor_positioning" name="Indoor Positioning" requirement="mandatory" sourceId="org.bluetooth.service.indoor_positioning" type="primary" uuid="1821">
+    <informativeText>Abstract: The Indoor Positioning Service exposes location information to support e.g. mobile handsets to position themselves in an environment where GPS signal is not available, like indoor premises.
+Summary: The service shall be either a Primary Service or Secondary Service and the service UUID set to Indoor Positioning Service.</informativeText>
+
+    <!--Indoor Positioning Configuration-->
+    <characteristic const="false" id="indoor_positioning_configuration" name="Indoor Positioning Configuration" sourceId="org.bluetooth.characteristic.indoor_positioning_configuration" uuid="2AAD">
+      <informativeText>Abstract: The Indoor Positioning Configuration describes the set of characteristic values included in the Indoor Positioning Service AD type.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Latitude-->
+    <characteristic const="false" id="latitude" name="Latitude" sourceId="org.bluetooth.characteristic.latitude" uuid="2AAE">
+      <informativeText>Abstract: The Latitude characteristic describes the WGS84 North coordinate of the device.</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Longitude-->
+    <characteristic const="false" id="longitude" name="Longitude" sourceId="org.bluetooth.characteristic.longitude" uuid="2AAF">
+      <informativeText>Abstract: The Longitude characteristic describes the WGS84 East coordinate of the device.</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Local North Coordinate-->
+    <characteristic const="false" id="local_north_coordinate" name="Local North Coordinate" sourceId="org.bluetooth.characteristic.local_north_coordinate" uuid="2AB0">
+      <informativeText>Abstract: The Local North characteristic describes the North coordinate of the device using local coordinate system.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Local East Coordinate-->
+    <characteristic const="false" id="local_east_coordinate" name="Local East Coordinate" sourceId="org.bluetooth.characteristic.local_east_coordinate" uuid="2AB1">
+      <informativeText>Abstract: The Local East characteristic describes the East coordinate of the device using local coordinate system.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Floor Number-->
+    <characteristic const="false" id="floor_number" name="Floor Number" sourceId="org.bluetooth.characteristic.floor_number" uuid="2AB2">
+      <informativeText>Abstract: The Floor Number characteristic describes in which floor the device is installed.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Altitude-->
+    <characteristic const="false" id="altitude" name="Altitude" sourceId="org.bluetooth.characteristic.altitude" uuid="2AB3">
+      <informativeText>Abstract: The Altitude characteristic describes the altitude of the device.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Uncertainty-->
+    <characteristic const="false" id="uncertainty" name="Uncertainty" sourceId="org.bluetooth.characteristic.uncertainty" uuid="2AB4">
+      <informativeText>Abstract: The Uncertainty characteristic describes the uncertainty of the location information the device exposes.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Location Name-->
+    <characteristic const="false" id="location_name" name="Location Name" sourceId="org.bluetooth.characteristic.location_name" uuid="2AB5">
+      <informativeText>Abstract: The Location Name characteristic describes the name of the location the device is installed in.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

@@ -1,0 +1,17 @@
+<!--Next DST Change Service-->
+<gatt>
+
+  <!--Next DST Change Service-->
+  <service advertise="false" id="next_dst_change" name="Next DST Change Service" requirement="mandatory" sourceId="org.bluetooth.service.next_dst_change" type="primary" uuid="1807">
+    <informativeText>Abstract: This service defines how the information about an upcoming DST change can be exposed using the Generic Attribute Profile (GATT).
+Summary: This service enables a Bluetooth device that has knowledge about the next occurrence of a DST change to expose this information to another Bluetooth device.</informativeText>
+
+    <!--Time with DST-->
+    <characteristic const="false" id="time_with_dst" name="Time with DST" sourceId="org.bluetooth.characteristic.time_with_dst" uuid="2A11">
+      <value length="8" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

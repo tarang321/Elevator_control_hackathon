@@ -1,0 +1,19 @@
+---
+description: Route Silicon Labs BLE GATT and SLC work through the BLE GATT skill
+globs:
+  - "**/*.c"
+  - "**/*.h"
+  - "**/*.slcp"
+  - "**/*.slcc"
+  - "**/config/btconf/**/*"
+  - "**/autogen/**/*"
+  - "**/CMakeLists.txt"
+  - "**/*.cmake"
+alwaysApply: false
+---
+
+When working in a Silicon Labs SLC/Simplicity SDK project and the task involves BLE GATT services, characteristics, descriptors, `.slcp` components, `config/btconf`, or generated GATT symbols, use the `silicon-labs-add-ble-service` skill.
+
+Do not add a BLE service by creating standalone `service.c` / `service.h` files, manually linking them in CMake, or hand-editing generated files. Model standard and custom GATT database changes through GATT Configurator/Profile Toolkit XML inputs and regenerate the project.
+
+This applies to SIG services, Silicon Labs predefined services, and custom UUID-based services.

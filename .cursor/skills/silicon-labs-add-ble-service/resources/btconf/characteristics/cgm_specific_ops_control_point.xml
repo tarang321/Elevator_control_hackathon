@@ -1,0 +1,8 @@
+<!--CGM Specific Ops Control Point-->
+    <characteristic const="false" id="cgm_specific_ops_control_point" name="CGM Specific Ops Control Point" sourceId="org.bluetooth.characteristic.cgm_specific_ops_control_point" uuid="2AAC">
+      <informativeText>
+Summary: The CGM Specific Ops Control Point encapsulates all functionality and mechanisms that are unique to a CGM-device. 
+             This control point is used with a service to provide CGM specific functionality and the ability to change CGM specific settings of the device. This includes functions like setting the CGM Communication Interval or the sending a calibration value to the device. The criterion in the Operand field is defined by the service that references this characteristic.</informativeText>
+      <value length="14" type="hex" variable_length="true"/>
+      <properties/>
+    </characteristic>

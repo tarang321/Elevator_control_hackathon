@@ -1,0 +1,12 @@
+<!--Tx Power Level-->
+    <characteristic const="false" id="tx_power_level" name="Tx Power Level" sourceId="org.bluetooth.characteristic.tx_power_level" uuid="2A07">
+      <informativeText>Abstract: 
+      The Transmit Power Level characteristic represents the current transmit power level in dBm, and the level ranges from -100 dBm to +20 dBm to a resolution of 1 dBm.            
+		
+Summary: 
+    The value of the characteristic is a signed 8 bit integer that has a fixed point exponent of 0.            
+		
+Examples: The value 0x12 is interpreted as +18dBm The value 0xEE is interpreted as -18dBm</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

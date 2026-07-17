@@ -1,0 +1,12 @@
+<!--Scan Interval Window-->
+    <characteristic const="false" id="scan_interval_window" name="Scan Interval Window" sourceId="org.bluetooth.characteristic.scan_interval_window" uuid="2A4F">
+      <informativeText>Abstract: 
+    The Scan Interval Window characteristic is used to store the scan parameters of the GATT Client. Included in this characteristic are the Scan Interval and Scan Window of the GATT Client device.
+		
+Summary: 
+    The Scan Interval Window characteristic is used to store the scan parameters of the GATT Client.  The GATT Server can use these values to optimize its own advertisement rate and to minimize 
+    the rate of its own advertisements while also minimizing the latency of reconnections.
+    </informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

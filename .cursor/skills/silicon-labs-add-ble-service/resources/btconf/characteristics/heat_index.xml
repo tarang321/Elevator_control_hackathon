@@ -1,0 +1,5 @@
+<!--Heat Index-->
+    <characteristic const="false" id="heat_index" name="Heat Index" sourceId="org.bluetooth.characteristic.heat_index" uuid="2A7A">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

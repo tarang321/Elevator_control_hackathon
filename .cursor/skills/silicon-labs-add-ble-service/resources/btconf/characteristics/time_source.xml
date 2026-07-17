@@ -1,0 +1,5 @@
+<!--Time Source-->
+    <characteristic const="false" id="time_source" name="Time Source" sourceId="org.bluetooth.characteristic.time_source" uuid="2A13">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

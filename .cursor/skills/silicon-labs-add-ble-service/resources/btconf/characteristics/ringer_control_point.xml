@@ -1,0 +1,12 @@
+<!--Ringer Control point-->
+    <characteristic const="false" id="ringer_control_point" name="Ringer Control point" sourceId="org.bluetooth.characteristic.ringer_control_point" uuid="2A40">
+      <informativeText>Abstract:             
+        The Ringer Control Point characteristic defines the Control Point of Ringer.
+            Value 1, meaning "Silent Mode"
+            Value 2, meaning "Mute Once"
+            Value 3, meaning "Cancel Silent Mode"
+		
+Examples: The value 0x01 shall be interpreted as "Silent Mode"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

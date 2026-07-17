@@ -1,0 +1,5 @@
+<!--Apparent Wind Direction-->
+    <characteristic const="false" id="apparent_wind_direction" name="Apparent Wind Direction" sourceId="org.bluetooth.characteristic.apparent_wind_direction" uuid="2A73">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

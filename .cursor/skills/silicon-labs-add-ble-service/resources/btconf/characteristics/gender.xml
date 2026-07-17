@@ -1,0 +1,6 @@
+<!--Gender-->
+    <characteristic const="false" id="gender" name="Gender" sourceId="org.bluetooth.characteristic.gender" uuid="2A8C">
+      <informativeText>Abstract: Gender of the user. The value of the Gender characteristic are defined below: 0:male,1:female, 2:Unspecified,3-225: RFU</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,6 @@
+<!--Longitude-->
+    <characteristic const="false" id="longitude" name="Longitude" sourceId="org.bluetooth.characteristic.longitude" uuid="2AAF">
+      <informativeText>Abstract: The Longitude characteristic describes the WGS84 East coordinate of the device.</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

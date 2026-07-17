@@ -1,0 +1,5 @@
+<!--User Index-->
+    <characteristic const="false" id="user_index" name="User Index" sourceId="org.bluetooth.characteristic.user_index" uuid="2A9A">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

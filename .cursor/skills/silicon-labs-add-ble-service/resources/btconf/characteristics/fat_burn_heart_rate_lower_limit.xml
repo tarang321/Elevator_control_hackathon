@@ -1,0 +1,6 @@
+<!--Fat Burn Heart Rate Lower Limit-->
+    <characteristic const="false" id="fat_burn_heart_rate_lower_limit" name="Fat Burn Heart Rate Lower Limit" sourceId="org.bluetooth.characteristic.fat_burn_heart_rate_lower_limit" uuid="2A88">
+      <informativeText>Abstract: Lower limit of the heart rate where the user maximizes the fat burn while exersizing</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,6 @@
+<!--Local North Coordinate-->
+    <characteristic const="false" id="local_north_coordinate" name="Local North Coordinate" sourceId="org.bluetooth.characteristic.local_north_coordinate" uuid="2AB0">
+      <informativeText>Abstract: The Local North characteristic describes the North coordinate of the device using local coordinate system.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

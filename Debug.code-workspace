@@ -1,0 +1,42 @@
+{
+	"folders": [
+		{
+			"path": "../../../Desktop/Debug"
+		},
+		{
+			"name": "bt_soc_blinky_demos",
+			"path": "../bt_soc_blinky_demos"
+		},
+		{
+			"name": "bt_soc_ibeacon_demo",
+			"path": "../bt_soc_ibeacon_demo"
+		},
+		{
+			"name": "bt_soc_thermometer_demo",
+			"path": "../bt_soc_thermometer_demo"
+		},
+		{
+			"name": "bt_soc_thermometer_extended",
+			"path": "../bt_soc_thermometer_extended"
+		},
+		{
+			"name": "sleeptimer_baremetal",
+			"path": "../../../Desktop/Tranning sessions/technical_training/day2/sleeptimer_baremetal"
+		},
+		{
+			"name": "dmadrv_baremetal",
+			"path": "../../../Desktop/Tranning sessions/technical_training/day3/dmadrv_baremetal"
+		},
+		{
+			"name": "brd4187c",
+			"path": "../../../Downloads/all_board_day3/all_board/dmadrv_baremetal/brd4187c"
+		},
+		{
+			"path": "../bt_soc_thermometer_day_4_AI"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}

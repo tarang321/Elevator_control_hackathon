@@ -1,0 +1,5 @@
+<!--Body Composition Measurement-->
+    <characteristic const="false" id="body_composition_measurement" name="Body Composition Measurement" sourceId="org.bluetooth.characteristic.body_composition_measurement" uuid="2A9C">
+      <value length="42" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

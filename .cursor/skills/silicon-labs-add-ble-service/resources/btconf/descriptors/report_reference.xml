@@ -1,0 +1,9 @@
+<!--Report Reference-->
+      <descriptor const="false" discoverable="true" id="report_reference" name="Report Reference" sourceId="org.bluetooth.descriptor.report_reference" uuid="2908">
+        <informativeText>
+Summary: 
+        Mapping information in the form of a Report ID and Report Type which maps the current parent characteristic to the Report ID(s) and Report Type (s) defined within the Report Map characteristic.  
+	</informativeText>
+        <properties/>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>

@@ -1,0 +1,5 @@
+<!--User Control Point-->
+    <characteristic const="false" id="user_control_point" name="User Control Point" sourceId="org.bluetooth.characteristic.user_control_point" uuid="2A9F">
+      <value length="0" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

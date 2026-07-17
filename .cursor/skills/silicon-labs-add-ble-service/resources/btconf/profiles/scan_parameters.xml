@@ -1,0 +1,53 @@
+<!--Scan Parameters-->
+<gatt>
+
+  <!--Scan Parameters-->
+  <service advertise="false" id="scan_parameters" name="Scan Parameters" requirement="mandatory" sourceId="org.bluetooth.service.scan_parameters" type="primary" uuid="1813">
+    <informativeText>Abstract: This service enables a GATT Client to store the LE scan parameters it is using on a GATT Server device so that the GATT Server can  utilize the information to adjust behavior to optimize power consumption and/or reconnection latency
+Summary: The Scan Parameters Service enables a GATT Server device to expose a characteristic for the GATT Client to write its scan interval and scan window on the GATT Server device.</informativeText>
+
+    <!--Scan Interval Window-->
+    <characteristic const="false" id="scan_interval_window" name="Scan Interval Window" sourceId="org.bluetooth.characteristic.scan_interval_window" uuid="2A4F">
+      <informativeText>Abstract: 
+    The Scan Interval Window characteristic is used to store the scan parameters of the GATT Client. Included in this characteristic are the Scan Interval and Scan Window of the GATT Client device.
+		
+Summary: 
+    The Scan Interval Window characteristic is used to store the scan parameters of the GATT Client.  The GATT Server can use these values to optimize its own advertisement rate and to minimize 
+    the rate of its own advertisements while also minimizing the latency of reconnections.
+    </informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Scan Refresh-->
+    <characteristic const="false" id="scan_refresh" name="Scan Refresh" sourceId="org.bluetooth.characteristic.scan_refresh" uuid="2A31">
+      <informativeText>Abstract:             
+        The Scan Refresh characteristic is used to notify the Client that the Server requires the Scan Interval Window characteristic to be written with the latest values upon notification. 
+		</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

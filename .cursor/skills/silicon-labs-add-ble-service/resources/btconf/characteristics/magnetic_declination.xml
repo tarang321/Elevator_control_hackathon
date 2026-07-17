@@ -1,0 +1,5 @@
+<!--Magnetic Declination-->
+    <characteristic const="false" id="magnetic_declination" name="Magnetic Declination" sourceId="org.bluetooth.characteristic.magnetic_declination" uuid="2A2C">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

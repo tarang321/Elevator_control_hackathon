@@ -1,0 +1,9 @@
+<!--Glucose Feature-->
+    <characteristic const="false" id="glucose_feature" name="Glucose Feature" sourceId="org.bluetooth.characteristic.glucose_feature" uuid="2A51">
+      <informativeText>
+Summary: 
+            The Glucose Feature characteristic is used to describe the supported features of the Server. When read, the Glucose Feature characteristic returns a value that is used by a Client to determine the supported features of the Server.
+        </informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

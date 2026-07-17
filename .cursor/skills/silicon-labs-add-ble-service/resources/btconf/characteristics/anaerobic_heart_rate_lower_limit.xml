@@ -1,0 +1,6 @@
+<!--Anaerobic Heart Rate Lower Limit-->
+    <characteristic const="false" id="anaerobic_heart_rate_lower_limit" name="Anaerobic Heart Rate Lower Limit" sourceId="org.bluetooth.characteristic.anaerobic_heart_rate_lower_limit" uuid="2A81">
+      <informativeText>Abstract: Lower limit of the heart rate where the user enhances his anaerobic tolerance while exercising.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

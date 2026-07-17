@@ -1,0 +1,8 @@
+<!--Supported Unread Alert Category-->
+    <characteristic const="false" id="supported_unread_alert_category" name="Supported Unread Alert Category" sourceId="org.bluetooth.characteristic.supported_unread_alert_category" uuid="2A48">
+      <informativeText>Abstract: Category that the server supports for unread alert.
+Summary: This characteristic uses the Alert Category ID Bit Mask Characteristic.  If bit(s) is/are set, it means the server supports the corresponded categories for unread alert.
+Examples: The value 0x03 is interpreted that this server supports "Simple Alert" and "Email" categories for unread alert.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

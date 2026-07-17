@@ -1,0 +1,6 @@
+<!--Two Zone Heart Rate Limit-->
+    <characteristic const="false" id="two_zone_heart_rate_limit" name="Two Zone Heart Rate Limit" sourceId="org.bluetooth.characteristic.two_zone_heart_rate_limit" uuid="2A95">
+      <informativeText>Abstract: Heart rate limit between the heart rate zones for the 2-zone heart rate definition (Fitness and Fat Burn).</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

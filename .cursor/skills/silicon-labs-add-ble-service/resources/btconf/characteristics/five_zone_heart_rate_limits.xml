@@ -1,0 +1,6 @@
+<!--Five Zone Heart Rate Limits-->
+    <characteristic const="false" id="five_zone_heart_rate_limits" name="Five Zone Heart Rate Limits" sourceId="org.bluetooth.characteristic.five_zone_heart_rate_limits" uuid="2A8B">
+      <informativeText>Abstract: Data structure containing the limits between the heart rate zones for the 5-zone heart rate definition (Maximum, Hard, Moderate, Light and Very Light).</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

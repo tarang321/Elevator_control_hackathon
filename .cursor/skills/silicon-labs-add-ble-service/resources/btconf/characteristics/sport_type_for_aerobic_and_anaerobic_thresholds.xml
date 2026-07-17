@@ -1,0 +1,6 @@
+<!--Sport Type for Aerobic and Anaerobic Thresholds-->
+    <characteristic const="false" id="sport_type_for_aerobic_and_anaerobic_thresholds" name="Sport Type for Aerobic and Anaerobic Thresholds" sourceId="org.bluetooth.characteristic.sport_type_for_aerobic_and_anaerobic_thresholds" uuid="2A93">
+      <informativeText>Abstract:  Sport type enumeration(See note below). The values of the Sport Type for Aerobic and Anaerobic Thresholds characteristic are defined below</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,8 @@
+<!--Alert Category ID-->
+    <characteristic const="false" id="alert_category_id" name="Alert Category ID" sourceId="org.bluetooth.characteristic.alert_category_id" uuid="2A43">
+      <informativeText>Abstract: Categories of alerts/messages.
+Summary: The value of the characteristic is an unsigned 8 bit integer that has a fixed point exponent of 0. The Alert Category ID characteristic defines the predefined categories of messages as an enumeration.
+Examples: The value 0x01 is interpreted as "Email"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

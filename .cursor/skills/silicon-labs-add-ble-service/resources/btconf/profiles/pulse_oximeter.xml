@@ -1,0 +1,358 @@
+<!--Pulse Oximeter-->
+<gatt>
+
+  <!--Pulse Oximeter Service-->
+  <service advertise="false" id="pulse_oximeter" name="Pulse Oximeter Service" requirement="mandatory" sourceId="org.bluetooth.service.pulse_oximeter" type="primary" uuid="1822">
+    <informativeText>Abstract: This Service specification proposes a pulse oximetry server for use in consumer and professional healthcare applications.
+Summary: The Pulse Oximeter Service exposes pulse oximetry data related to a non-invasive pulse oximetry sensor for consumer and professional healthcare applications.</informativeText>
+
+    <!--PLX Spot-Check Measurement-->
+    <characteristic const="false" id="plx_spot_check_measurement" name="PLX Spot-Check Measurement" sourceId="org.bluetooth.characteristic.plx_spot_check_measurement" uuid="2A5E">
+      <informativeText>
+Summary: The PLX Spot-check Measurement characteristic, if supported, is used to send Spot-check measurements of SpO2 (Percent oxygen saturation of hemoglobin) and PR (pulse rate). This characteristic is a variable length structure containing the Flags field, the SpO2PR-Spot-Check field, and depending on the contents of the Flags field, the Timestamp field, the Measurement Status field, the Device and Sensor Status field, and/or the Pulse Amplitude Index field. </informativeText>
+      <value length="19" type="hex" variable_length="false"/>
+      <properties>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--PLX Continuous Measurement-->
+    <characteristic const="false" id="plx_continuous_measurement" name="PLX Continuous Measurement" sourceId="org.bluetooth.characteristic.plx_continuous_measurement" uuid="2A5F">
+      <informativeText>
+Summary: The PLX Continuous Measurement characteristic, if supported, is used to send periodic pulse oximetry measurements. This characteristic is a variable length structure containing the Flags field (to indicate presence of optional fields), the SpO2PR-Normal field, and depending on the contents of the Flags field, the SpO2PR-Fast field, the SpO2PR-Slow field, the Measurement Status field, the Device and Sensor Status field, and/or the Pulse Amplitude Index field.</informativeText>
+      <value length="20" type="hex" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--PLX Features-->
+    <characteristic const="false" id="plx_features" name="PLX Features" sourceId="org.bluetooth.characteristic.plx_features" uuid="2A60">
+      <informativeText>
+Summary: The PLX Features characteristic is used to describe the supported features of the Server. Included in the characteristic is a PLX Features field, and, depending on the contents of the PLX Features field, the Measurement Status Support field, and the Device and Sensor Status Support field.</informativeText>
+      <value length="7" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Record Access Control Point-->
+    <characteristic const="false" id="record_access_control_point" name="Record Access Control Point" sourceId="org.bluetooth.characteristic.record_access_control_point" uuid="2A52">
+      <informativeText>
+Summary: This control point is used with a service to provide basic management functionality for the Glucose Sensor patient record database. This enables functions including counting records, transmitting records and clearing records based on filter criterion. The filter criterion in the Operand field is defined by the service that references this characteristic as is the format of a record (which may be comprised of one or more characteristics) and the sequence of transferred records.</informativeText>
+      <value length="2" type="hex" variable_length="true"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+
+  <!--Device Information-->
+  <service advertise="false" id="device_information" name="Device Information" requirement="mandatory" sourceId="org.bluetooth.service.device_information" type="primary" uuid="180A">
+    <informativeText>Abstract: The Device Information Service exposes manufacturer and/or vendor information about a device.
+Summary: This service exposes manufacturer information about a device. The Device Information Service is instantiated as a Primary Service. Only one instance of the Device Information Service is exposed on a device.</informativeText>
+
+    <!--Manufacturer Name String-->
+    <characteristic const="false" id="manufacturer_name_string" name="Manufacturer Name String" sourceId="org.bluetooth.characteristic.manufacturer_name_string" uuid="2A29">
+      <informativeText>Abstract: 
+        The value of this characteristic is a UTF-8 string representing the name of the manufacturer of the device.            
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Model Number String-->
+    <characteristic const="false" id="model_number_string" name="Model Number String" sourceId="org.bluetooth.characteristic.model_number_string" uuid="2A24">
+      <informativeText>Abstract: 
+            The value of this characteristic is a UTF-8 string representing the model number assigned by the device vendor.
+        </informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Serial Number String-->
+    <characteristic const="false" id="serial_number_string" name="Serial Number String" sourceId="org.bluetooth.characteristic.serial_number_string" uuid="2A25">
+      <informativeText>Abstract: 
+      The value of this characteristic is a variable-length UTF-8 string representing the serial number for a particular instance of the device.            
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Hardware Revision String-->
+    <characteristic const="false" id="hardware_revision_string" name="Hardware Revision String" sourceId="org.bluetooth.characteristic.hardware_revision_string" uuid="2A27">
+      <informativeText>
+Summary: 
+      The value of this characteristic is a UTF-8 string representing the hardware revision for the hardware within the device.
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Firmware Revision String-->
+    <characteristic const="false" id="firmware_revision_string" name="Firmware Revision String" sourceId="org.bluetooth.characteristic.firmware_revision_string" uuid="2A26">
+      <informativeText>
+Summary: 
+            The value of this characteristic is a UTF-8 string representing the firmware revision for the firmware within the device.
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Software Revision String-->
+    <characteristic const="false" id="software_revision_string" name="Software Revision String" sourceId="org.bluetooth.characteristic.software_revision_string" uuid="2A28">
+      <informativeText>Abstract:             
+      The value of this characteristic is a UTF-8 string representing the software revision for the software within the device.
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--System ID-->
+    <characteristic const="false" id="system_id" name="System ID" sourceId="org.bluetooth.characteristic.system_id" uuid="2A23">
+      <informativeText>Abstract: 
+      The SYSTEM ID characteristic consists of a structure with two fields. The first field are the LSOs and the second field contains the MSOs.
+      This is a 64-bit structure which consists of a 40-bit manufacturer-defined identifier concatenated with a 24 bit unique Organizationally Unique Identifier (OUI). The OUI is issued by the IEEE Registration Authority (http://standards.ieee.org/regauth/index.html) and is required to be used in accordance with IEEE Standard 802-2001.6 while the least significant 40 bits are manufacturer defined.
+      If System ID generated based on a Bluetooth Device Address, it is required to be done as follows. System ID and the Bluetooth Device Address have a very similar structure: a Bluetooth Device Address is 48 bits in length and consists of a 24 bit Company Assigned Identifier (manufacturer defined identifier) concatenated with a 24 bit Company Identifier (OUI). In order to encapsulate a Bluetooth Device Address as System ID, the Company Identifier is concatenated with 0xFFFE followed by the Company Assigned Identifier of the Bluetooth Address. For more guidelines related to EUI-64, refer to http://standards.ieee.org/develop/regauth/tut/eui64.pdf.
+    
+Examples: If the system ID is based of a Bluetooth Device Address with a Company Identifier (OUI) is 0x123456 and the Company Assigned Identifier is 0x9ABCDE, then the System Identifier is required to be 0x123456FFFE9ABCDE.</informativeText>
+      <value length="8" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--IEEE 11073-20601 Regulatory Certification Data List-->
+    <characteristic const="false" id="ieee_11073_20601_regulatory_certification_data_list" name="IEEE 11073-20601 Regulatory Certification Data List" sourceId="org.bluetooth.characteristic.ieee_11073-20601_regulatory_certification_data_list" uuid="2A2A">
+      <informativeText>Abstract: The value of the characteristic is an opaque structure listing various regulatory and/or certification compliance items to which the device claims adherence.
+Summary: 
+      The content of this characteristic is determined by the Authorizing Organization that provides Certifications. Refer to 11073-20601 [1] or Continua Design Guidelines [2] for more information on the format of this list.
+       [1]	IEEE Std 11073-20601 - 2008 Health Informatics - Personal Health Device Communication - Application Profile - Optimized Exchange Protocol - version 1.0 or later
+       [2]	Continua Design Guidelines - Continua Health Alliance; http://www.continuaalliance.org
+    </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--PnP ID-->
+    <characteristic const="false" id="pnp_id" name="PnP ID" sourceId="org.bluetooth.characteristic.pnp_id" uuid="2A50">
+      <informativeText>Abstract: 
+    The PnP_ID characteristic returns its value when read using the GATT Characteristic Value Read procedure.
+    
+Summary: 
+    The PnP_ID characteristic is a set of values that used to create a device ID value that is unique for this device.  Included in the characteristic is a Vendor ID Source field, a Vendor ID field, a Product ID field and a Product Version field.  These values are used to identify all devices of a given type/model/version using numbers.  
+    </informativeText>
+      <value length="7" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <!--Current Time Service-->
+  <service advertise="false" id="current_time" name="Current Time Service" requirement="mandatory" sourceId="org.bluetooth.service.current_time" type="primary" uuid="1805">
+    <informativeText>Abstract: This service defines how the current time can be exposed using the Generic Attribute Profile (GATT).
+Summary: Many Bluetooth devices have the ability to store and show time information. This service defines how a Bluetooth device can expose time information to other Bluetooth devices.</informativeText>
+
+    <!--Current Time-->
+    <characteristic const="false" id="current_time" name="Current Time" sourceId="org.bluetooth.characteristic.current_time" uuid="2A2B">
+      <value length="10" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Local Time Information-->
+    <characteristic const="false" id="local_time_information" name="Local Time Information" sourceId="org.bluetooth.characteristic.local_time_information" uuid="2A0F">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Reference Time Information-->
+    <characteristic const="false" id="reference_time_information" name="Reference Time Information" sourceId="org.bluetooth.characteristic.reference_time_information" uuid="2A14">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <!--Bond Management Service-->
+  <service advertise="false" id="bond_management" name="Bond Management Service" requirement="mandatory" sourceId="org.bluetooth.service.bond_management" type="primary" uuid="181E">
+    <informativeText>Abstract: This Specification proposes that this service will enable users to manage their bonds on devices with a limited user interface.
+Summary: This service defines how a peer Bluetooth device can manage the storage of bond information, especially the deletion of it, on the Bluetooth device supporting this service.</informativeText>
+
+    <!--Bond Management Control Point-->
+    <characteristic const="false" id="bond_management_control_point" name="Bond Management Control Point" sourceId="org.bluetooth.characteristic.bond_management_control_point" uuid="2AA4">
+      <informativeText>Abstract: The Bond Management Service Control Point (BMSCP) encapsulates functionality and mechanisms to control the bonds of a device. 
+Summary: This control point is used with a service to provide BMS specific functionality and the ability to manage bonds on the device. This includes functions like delete the bond information of the current connection or deletion of the whole bond information. The criterion in the Operand field is defined by the service that references this characteristic</informativeText>
+      <value length="1" type="hex" variable_length="true"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Bond Management Features-->
+    <characteristic const="false" id="bond_management_feature" name="Bond Management Features" sourceId="org.bluetooth.characteristic.bond_management_feature" uuid="2AA5">
+      <value length="3" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+
+  <!--Battery Service-->
+  <service advertise="false" id="battery_service" name="Battery Service" requirement="mandatory" sourceId="org.bluetooth.service.battery_service" type="primary" uuid="180F">
+    <informativeText>Abstract: The Battery Service exposes the state of a battery within a device.
+Summary: The Battery Service exposes the Battery State and Battery Level of a single battery or set of batteries in a device.</informativeText>
+
+    <!--Battery Level-->
+    <characteristic const="false" id="battery_level" name="Battery Level" sourceId="org.bluetooth.characteristic.battery_level" uuid="2A19">
+      <informativeText>Abstract: 
+            The current charge level of a battery. 100% represents fully charged while 0% represents fully discharged.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Characteristic Presentation Format-->
+      <descriptor const="false" discoverable="true" id="characteristic_presentation_format" name="Characteristic Presentation Format" sourceId="org.bluetooth.descriptor.gatt.characteristic_presentation_format" uuid="2904">
+        <informativeText>Abstract: 
+        The Characteristic Presentation Format descriptor defines the format of the Characteristic Value.            
+		
+Summary: 
+        One or more Characteristic Presentation Format descriptors may be present. If multiple of these descriptors are present, then a Aggregate Formate descriptor is present.
+        This descriptor is read only and does not require authentication or authorization to read.
+        This descriptor is composed of five parts: format, exponent, unit, name space and description.
+        The Format field determines how a single value contained in the Characteristic Value is formatted.
+        The Exponent field is used with interger data types to determine how the Characteristic Value is furhter formatted.
+        The actual value = Characteristic Value * 10^Exponent.            
+		
+Examples: 
+            When encoding an IPv4 address, the uint32 Format type is used.
+		 
+            When encoding an IPv6 address, the uint128 Format type is used.
+		 
+            When encoding a Bluetooth address (BD_ADDR), the uint48 Format type is used.
+		 
+            For a Characteristic Value of 23 and an Exponent of 2, the actual value is 2300
+		 
+            For a Characteristi Value of 3892 and an Exponent of -3, the actual value is 3.892
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="7" type="hex" variable_length="false"/>
+      </descriptor>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

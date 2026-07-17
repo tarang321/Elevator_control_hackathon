@@ -1,0 +1,5 @@
+<!--CGM Session Run Time-->
+    <characteristic const="false" id="cgm_session_run_time" name="CGM Session Run Time" sourceId="org.bluetooth.characteristic.cgm_session_run_time" uuid="2AAB">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

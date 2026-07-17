@@ -1,0 +1,91 @@
+<!--Phone Alert Status Service-->
+<gatt>
+
+  <!--Phone Alert Status Service-->
+  <service advertise="false" id="phone_alert_status" name="Phone Alert Status Service" requirement="mandatory" sourceId="org.bluetooth.service.phone_alert_status" type="primary" uuid="180E">
+    <informativeText>Abstract: This service exposes the phone alert status when in a connection.
+Summary: The Phone Alert Status service uses the Alert Status characteristic, Ringer Setting characteristic to expose the phone alert status and Ringer Control Point characteristic to control phone into mute or enable.</informativeText>
+
+    <!--Alert Status-->
+    <characteristic const="false" id="alert_status" name="Alert Status" sourceId="org.bluetooth.characteristic.alert_status" uuid="2A3F">
+      <informativeText>Abstract:             
+        The Alert Status characteristic defines the Status of alert.
+            - Bit 0, meaning "Ringer State"
+            - Bit 1, meaning "Vibrator State"
+            - Bit 2, meaning "Display Alert Status"
+		
+Examples: Bit 0, 0 meaning "Ringer State" not active, 1 meaning "Ringer State" active Bit 1, 0 meaning "Vibrator State" not active, 1 meaning "Vibrator State" active Bit 2, 0 meaning "Display Alert State" not active, 1 meaning "Display Alert State" active</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Ringer Setting-->
+    <characteristic const="false" id="ringer_setting" name="Ringer Setting" sourceId="org.bluetooth.characteristic.ringer_setting" uuid="2A41">
+      <informativeText>Abstract:             
+        The Ringer Setting characteristic defines the Setting of the Ringer.
+            Value 0, meaning "Ringer Silent"
+            Value 1, meaning "Ringer Normal"
+		
+Examples: The value 0x01 shall be interpreted as "Ringer Normal"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Ringer Control point-->
+    <characteristic const="false" id="ringer_control_point" name="Ringer Control point" sourceId="org.bluetooth.characteristic.ringer_control_point" uuid="2A40">
+      <informativeText>Abstract:             
+        The Ringer Control Point characteristic defines the Control Point of Ringer.
+            Value 1, meaning "Silent Mode"
+            Value 2, meaning "Mute Once"
+            Value 3, meaning "Cancel Silent Mode"
+		
+Examples: The value 0x01 shall be interpreted as "Silent Mode"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

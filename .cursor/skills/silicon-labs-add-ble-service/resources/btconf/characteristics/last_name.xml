@@ -1,0 +1,6 @@
+<!--Last Name-->
+    <characteristic const="false" id="last_name" name="Last Name" sourceId="org.bluetooth.characteristic.last_name" uuid="2A90">
+      <informativeText>Abstract: Last name of the user. See Note below.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

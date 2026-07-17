@@ -1,0 +1,6 @@
+<!--Weight-->
+    <characteristic const="false" id="weight" name="Weight" sourceId="org.bluetooth.characteristic.weight" uuid="2A98">
+      <informativeText>Abstract: Weight of the User</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

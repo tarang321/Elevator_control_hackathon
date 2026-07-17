@@ -1,0 +1,6 @@
+<!--VO2 Max-->
+    <characteristic const="false" id="vo2_max" name="VO2 Max" sourceId="org.bluetooth.characteristic.vo2_max" uuid="2A96">
+      <informativeText>Abstract: Maximal Oxygen uptake of a user</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

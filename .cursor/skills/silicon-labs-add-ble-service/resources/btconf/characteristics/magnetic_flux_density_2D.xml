@@ -1,0 +1,5 @@
+<!--Magnetic Flux Density - 2D-->
+    <characteristic const="false" id="magnetic_flux_density_2D" name="Magnetic Flux Density - 2D" sourceId="org.bluetooth.characteristic.magnetic_flux_density_2D" uuid="2AA0">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,8 @@
+<!--Blood Pressure Feature-->
+    <characteristic const="false" id="blood_pressure_feature" name="Blood Pressure Feature" sourceId="org.bluetooth.characteristic.blood_pressure_feature" uuid="2A49">
+      <informativeText>Abstract: 
+            The Blood Pressure Feature characteristic is used to describe the supported features of the Blood Pressure Sensor.        
+		</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

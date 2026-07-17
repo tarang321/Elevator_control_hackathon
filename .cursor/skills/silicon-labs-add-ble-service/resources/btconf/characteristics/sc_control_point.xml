@@ -1,0 +1,9 @@
+<!--SC Control Point-->
+    <characteristic const="false" id="sc_control_point" name="SC Control Point" sourceId="org.bluetooth.characteristic.sc_control_point" uuid="2A55">
+      <informativeText>
+Summary: 
+            The SC Control Point characteristic is used to request a specific function to be executed on the receiving device.
+        </informativeText>
+      <value length="4" type="hex" variable_length="true"/>
+      <properties/>
+    </characteristic>

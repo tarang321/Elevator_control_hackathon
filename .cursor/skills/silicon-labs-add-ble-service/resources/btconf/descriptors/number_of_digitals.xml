@@ -1,0 +1,6 @@
+<!--Number of Digitals-->
+      <descriptor const="false" discoverable="true" id="number_of_digitals" name="Number of Digitals" sourceId="org.bluetooth.descriptor.number_of_digitals" uuid="2909">
+        <informativeText>Abstract: The Characteristic Number of Digitals descriptor is used for defining the number of digitals in a characteristic.</informativeText>
+        <properties/>
+        <value length="1" type="hex" variable_length="false"/>
+      </descriptor>

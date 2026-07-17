@@ -1,0 +1,5 @@
+<!--Descriptor Value Changed-->
+    <characteristic const="false" id="descriptor_value_changed" name="Descriptor Value Changed" sourceId="org.bluetooth.characteristic.descriptor_value_changed" uuid="2A7D">
+      <value length="0" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

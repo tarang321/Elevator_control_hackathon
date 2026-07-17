@@ -1,0 +1,5 @@
+<!--Time Update Control Point-->
+    <characteristic const="false" id="time_update_control_point" name="Time Update Control Point" sourceId="org.bluetooth.characteristic.time_update_control_point" uuid="2A16">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

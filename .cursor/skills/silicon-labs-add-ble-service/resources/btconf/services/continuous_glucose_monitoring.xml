@@ -1,0 +1,131 @@
+<!--Continuous Glucose Monitoring-->
+<gatt>
+
+  <!--Continuous Glucose Monitoring-->
+  <service advertise="false" id="continuous_glucose_monitoring" name="Continuous Glucose Monitoring" requirement="mandatory" sourceId="org.bluetooth.service.continuous_glucose_monitoring" type="primary" uuid="181F">
+    <informativeText>Abstract: This service exposes glucose and other data from a personal Continuous Glucose Monitoring (CGM) sensor for use in consumer healthcare applications.
+Summary: The Continuous Glucose Monitoring (CGM) Service exposes glucose measurement and other data related to a personal CGM sensor for healthcare applications.</informativeText>
+
+    <!--CGM Measurement-->
+    <characteristic const="false" id="cgm_measurement" name="CGM Measurement" sourceId="org.bluetooth.characteristic.cgm_measurement" uuid="2AA7">
+      <informativeText>
+Summary: The CGM Measurement characteristic is a variable length structure containing one or more CGM Measurement records, each comprising a Size field, a Flags Field, a Glucose Concentration field, a Time Offset field, a Sensor Status Annunciation field (optional), a CGM Trend Information Field (optional), a CGM Quality Field (optional), and an E2E-CRC Field (mandatory if this feature is supported). </informativeText>
+      <value length="12" type="hex" variable_length="true"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--CGM Feature-->
+    <characteristic const="false" id="cgm_feature" name="CGM Feature" sourceId="org.bluetooth.characteristic.cgm_feature" uuid="2AA8">
+      <value length="6" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--CGM Status-->
+    <characteristic const="false" id="cgm_status" name="CGM Status" sourceId="org.bluetooth.characteristic.cgm_status" uuid="2AA9">
+      <informativeText>
+Summary: The CGM Status allows the Collector to actively request the current status from the CGM Sensor, particularly when the CGM measurement is not running and the status cannot be given in the measurement result in the Status Annunciation.</informativeText>
+      <value length="7" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--CGM Session Start Time-->
+    <characteristic const="false" id="cgm_session_start_time" name="CGM Session Start Time" sourceId="org.bluetooth.characteristic.cgm_session_start_time" uuid="2AAA">
+      <value length="11" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--CGM Session Run Time-->
+    <characteristic const="false" id="cgm_session_run_time" name="CGM Session Run Time" sourceId="org.bluetooth.characteristic.cgm_session_run_time" uuid="2AAB">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Record Access Control Point-->
+    <characteristic const="false" id="record_access_control_point" name="Record Access Control Point" sourceId="org.bluetooth.characteristic.record_access_control_point" uuid="2A52">
+      <informativeText>
+Summary: This control point is used with a service to provide basic management functionality for the Glucose Sensor patient record database. This enables functions including counting records, transmitting records and clearing records based on filter criterion. The filter criterion in the Operand field is defined by the service that references this characteristic as is the format of a record (which may be comprised of one or more characteristics) and the sequence of transferred records.</informativeText>
+      <value length="2" type="hex" variable_length="true"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--CGM Specific Ops Control Point-->
+    <characteristic const="false" id="cgm_specific_ops_control_point" name="CGM Specific Ops Control Point" sourceId="org.bluetooth.characteristic.cgm_specific_ops_control_point" uuid="2AAC">
+      <informativeText>
+Summary: The CGM Specific Ops Control Point encapsulates all functionality and mechanisms that are unique to a CGM-device. 
+             This control point is used with a service to provide CGM specific functionality and the ability to change CGM specific settings of the device. This includes functions like setting the CGM Communication Interval or the sending a calibration value to the device. The criterion in the Operand field is defined by the service that references this characteristic.</informativeText>
+      <value length="14" type="hex" variable_length="true"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

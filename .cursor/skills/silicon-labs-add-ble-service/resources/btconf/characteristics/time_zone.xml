@@ -1,0 +1,5 @@
+<!--Time Zone-->
+    <characteristic const="false" id="time_zone" name="Time Zone" sourceId="org.bluetooth.characteristic.time_zone" uuid="2A0E">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

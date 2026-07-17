@@ -1,0 +1,11 @@
+<!--Temperature Type-->
+    <characteristic const="false" id="temperature_type" name="Temperature Type" sourceId="org.bluetooth.characteristic.temperature_type" uuid="2A1D">
+      <informativeText>Abstract: 
+    The Temperature Type characteristic is an enumeration that indicates where the temperature was measured.            
+		
+Summary: 
+    These Temperature Type values correspond to the Temperature Type descriptions used in ISO/IEEE 11073-10408-2008.            
+		</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

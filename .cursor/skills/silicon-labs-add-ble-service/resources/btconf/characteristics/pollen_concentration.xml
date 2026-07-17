@@ -1,0 +1,5 @@
+<!--Pollen Concentration-->
+    <characteristic const="false" id="pollen_concentration" name="Pollen Concentration" sourceId="org.bluetooth.characteristic.pollen_concentration" uuid="2A75">
+      <value length="3" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

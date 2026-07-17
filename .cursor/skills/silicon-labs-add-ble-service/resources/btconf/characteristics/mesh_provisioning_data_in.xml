@@ -1,0 +1,6 @@
+<!--Mesh Provisioning Data In-->
+    <characteristic const="false" id="mesh_provisioning_data_in" name="Mesh Provisioning Data In" sourceId="com.silabs.characteristic.mesh_provisioning_data_in" uuid="2ADB">
+      <informativeText>Abstract: The Mesh Provisioning Data In characteristic can be written to send a Proxy PDU message containing Provisioning PDU to the Provisioning Server.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

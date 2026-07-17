@@ -1,0 +1,8 @@
+<!--Appearance-->
+    <characteristic const="false" id="appearance" name="Appearance" sourceId="org.bluetooth.characteristic.gap.appearance" uuid="2A01">
+      <informativeText>Abstract: 
+            The external appearance of this device. The values are composed of a category (10-bits) and sub-categories (6-bits).
+        </informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

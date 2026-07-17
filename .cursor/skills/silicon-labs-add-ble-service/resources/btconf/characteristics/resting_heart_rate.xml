@@ -1,0 +1,6 @@
+<!--Resting Heart Rate-->
+    <characteristic const="false" id="resting_heart_rate" name="Resting Heart Rate" sourceId="org.bluetooth.characteristic.resting_heart_rate" uuid="2A92">
+      <informativeText>Abstract: Lowest Heart Rate a user can reach</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

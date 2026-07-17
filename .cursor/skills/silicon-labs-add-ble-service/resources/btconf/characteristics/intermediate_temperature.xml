@@ -1,0 +1,8 @@
+<!--Intermediate Temperature-->
+    <characteristic const="false" id="intermediate_temperature" name="Intermediate Temperature" sourceId="org.bluetooth.characteristic.intermediate_temperature" uuid="2A1E">
+      <informativeText>Abstract: 
+    The Intermediate Temperature characteristic has the same format as the Temperature Measurement characteristic. However, due to a different context, the Value field is referred to as the Intermediate Temperature Value field.            
+		</informativeText>
+      <value length="17" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

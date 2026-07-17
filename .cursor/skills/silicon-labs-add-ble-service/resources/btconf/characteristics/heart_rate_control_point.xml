@@ -1,0 +1,5 @@
+<!--Heart Rate Control Point-->
+    <characteristic const="false" id="heart_rate_control_point" name="Heart Rate Control Point" sourceId="org.bluetooth.characteristic.heart_rate_control_point" uuid="2A39">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

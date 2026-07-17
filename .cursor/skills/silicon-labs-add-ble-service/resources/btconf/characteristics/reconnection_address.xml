@@ -1,0 +1,6 @@
+<!--Reconnection Address-->
+    <characteristic const="false" id="reconnection_address" name="Reconnection Address" sourceId="org.bluetooth.characteristic.gap.reconnection_address" uuid="2A03">
+      <informativeText>Abstract: The Information included in this page is informative. The normative descriptions are contained in the applicable specification.</informativeText>
+      <value length="6" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,7 @@
+<!--Digital-->
+    <characteristic const="false" id="digital" name="Digital" sourceId="org.bluetooth.characteristic.digital" uuid="2A56">
+      <informativeText>
+Summary: The Digital characteristic is used to expose and change the state of an IO Module's digital signals.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

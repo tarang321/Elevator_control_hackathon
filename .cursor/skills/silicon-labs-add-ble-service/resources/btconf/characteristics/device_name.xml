@@ -1,0 +1,5 @@
+<!--Device Name-->
+    <characteristic const="false" id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

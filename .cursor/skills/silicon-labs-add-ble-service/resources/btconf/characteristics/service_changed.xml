@@ -1,0 +1,5 @@
+<!--Service Changed-->
+    <characteristic const="false" id="service_changed" name="Service Changed" sourceId="org.bluetooth.characteristic.gatt.service_changed" uuid="2A05">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

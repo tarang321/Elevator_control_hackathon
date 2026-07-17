@@ -1,0 +1,7 @@
+<!--CGM Status-->
+    <characteristic const="false" id="cgm_status" name="CGM Status" sourceId="org.bluetooth.characteristic.cgm_status" uuid="2AA9">
+      <informativeText>
+Summary: The CGM Status allows the Collector to actively request the current status from the CGM Sensor, particularly when the CGM measurement is not running and the status cannot be given in the measurement result in the Status Annunciation.</informativeText>
+      <value length="7" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

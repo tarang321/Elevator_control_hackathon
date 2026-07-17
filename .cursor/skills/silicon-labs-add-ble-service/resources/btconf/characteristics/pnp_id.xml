@@ -1,0 +1,11 @@
+<!--PnP ID-->
+    <characteristic const="false" id="pnp_id" name="PnP ID" sourceId="org.bluetooth.characteristic.pnp_id" uuid="2A50">
+      <informativeText>Abstract: 
+    The PnP_ID characteristic returns its value when read using the GATT Characteristic Value Read procedure.
+    
+Summary: 
+    The PnP_ID characteristic is a set of values that used to create a device ID value that is unique for this device.  Included in the characteristic is a Vendor ID Source field, a Vendor ID field, a Product ID field and a Product Version field.  These values are used to identify all devices of a given type/model/version using numbers.  
+    </informativeText>
+      <value length="7" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

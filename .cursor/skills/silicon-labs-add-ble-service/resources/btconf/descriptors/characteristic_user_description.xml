@@ -1,0 +1,12 @@
+<!--Characteristic User Description-->
+      <descriptor const="false" discoverable="true" id="characteristic_user_description" name="Characteristic User Description" sourceId="org.bluetooth.descriptor.gatt.characteristic_user_description" uuid="2901">
+        <informativeText>Abstract: 
+        The Characteristic User Description descriptor provides a textual user description for a characteristic value.
+		
+Summary: 
+        If the Writable Auxiliary bit of the Characteristics Properties is set then this descriptor is written.
+        Only one User Description descriptor exists in a characteristic definition.            
+		</informativeText>
+        <properties/>
+        <value length="1" type="utf-8" variable_length="false"/>
+      </descriptor>

@@ -1,0 +1,8 @@
+<!--HTTPS Security-->
+    <characteristic const="false" id="https_security" name="HTTPS Security" sourceId="org.bluetooth.characteristic.https_security" uuid="2ABB">
+      <informativeText>Abstract: 
+            The HTTPS Security characteristic contains the known authenticity of the HTTPS Server certificate for the URI.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

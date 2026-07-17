@@ -1,0 +1,6 @@
+<!--Three Zone Heart Rate Limits-->
+    <characteristic const="false" id="three_zone_heart_rate_limits" name="Three Zone Heart Rate Limits" sourceId="org.bluetooth.characteristic.three_zone_heart_rate_limits" uuid="2A94">
+      <informativeText>Abstract: Data structure containing the limits between the heart rate zones for the 3-zone heart rate definition (Hard, Moderate and Light).</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,92 @@
+<!--Cycling Speed and Cadence-->
+<gatt>
+
+  <!--Cycling Speed and Cadence-->
+  <service advertise="false" id="cycling_speed_and_cadence" name="Cycling Speed and Cadence" requirement="mandatory" sourceId="org.bluetooth.service.cycling_speed_and_cadence" type="primary" uuid="1816">
+    <informativeText>Abstract: This service exposes speed-related and cadence-related data from a Cycling Speed and Cadence sensor intended for fitness applications.
+Summary: The Cycling Speed and Cadence (CSC) Service exposes speed-related data and/or cadence-related data while using the Cycling Speed and Cadence sensor (Server).</informativeText>
+
+    <!--CSC Measurement-->
+    <characteristic const="false" id="csc_measurement" name="CSC Measurement" sourceId="org.bluetooth.characteristic.csc_measurement" uuid="2A5B">
+      <informativeText>
+Summary: The CSC Measurement characteristic (CSC refers to Cycling Speed and Cadence) is a variable length structure containing a Flags field and, based on the contents of the Flags field, may contain one or more additional fields as shown in the tables below.</informativeText>
+      <value length="11" type="hex" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--CSC Feature-->
+    <characteristic const="false" id="csc_feature" name="CSC Feature" sourceId="org.bluetooth.characteristic.csc_feature" uuid="2A5C">
+      <informativeText>
+Summary: 
+            The CSC (Cycling Speed and Cadence) Feature characteristic is used to describe the supported features of the Server.
+        </informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Sensor Location-->
+    <characteristic const="false" id="sensor_location" name="Sensor Location" sourceId="org.bluetooth.characteristic.sensor_location" uuid="2A5D">
+      <informativeText>
+Summary: 
+            The Sensor Location characteristic is used to expose the location of the sensor.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--SC Control Point-->
+    <characteristic const="false" id="sc_control_point" name="SC Control Point" sourceId="org.bluetooth.characteristic.sc_control_point" uuid="2A55">
+      <informativeText>
+Summary: 
+            The SC Control Point characteristic is used to request a specific function to be executed on the receiving device.
+        </informativeText>
+      <value length="4" type="hex" variable_length="true"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

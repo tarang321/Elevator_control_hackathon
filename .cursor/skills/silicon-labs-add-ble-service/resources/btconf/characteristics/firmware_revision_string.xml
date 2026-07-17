@@ -1,0 +1,9 @@
+<!--Firmware Revision String-->
+    <characteristic const="false" id="firmware_revision_string" name="Firmware Revision String" sourceId="org.bluetooth.characteristic.firmware_revision_string" uuid="2A26">
+      <informativeText>
+Summary: 
+            The value of this characteristic is a UTF-8 string representing the firmware revision for the firmware within the device.
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

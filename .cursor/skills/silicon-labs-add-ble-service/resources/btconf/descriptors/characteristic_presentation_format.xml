@@ -1,0 +1,27 @@
+<!--Characteristic Presentation Format-->
+      <descriptor const="false" discoverable="true" id="characteristic_presentation_format" name="Characteristic Presentation Format" sourceId="org.bluetooth.descriptor.gatt.characteristic_presentation_format" uuid="2904">
+        <informativeText>Abstract: 
+        The Characteristic Presentation Format descriptor defines the format of the Characteristic Value.            
+		
+Summary: 
+        One or more Characteristic Presentation Format descriptors may be present. If multiple of these descriptors are present, then a Aggregate Formate descriptor is present.
+        This descriptor is read only and does not require authentication or authorization to read.
+        This descriptor is composed of five parts: format, exponent, unit, name space and description.
+        The Format field determines how a single value contained in the Characteristic Value is formatted.
+        The Exponent field is used with interger data types to determine how the Characteristic Value is furhter formatted.
+        The actual value = Characteristic Value * 10^Exponent.            
+		
+Examples: 
+            When encoding an IPv4 address, the uint32 Format type is used.
+		 
+            When encoding an IPv6 address, the uint128 Format type is used.
+		 
+            When encoding a Bluetooth address (BD_ADDR), the uint48 Format type is used.
+		 
+            For a Characteristic Value of 23 and an Exponent of 2, the actual value is 2300
+		 
+            For a Characteristi Value of 3892 and an Exponent of -3, the actual value is 3.892
+		</informativeText>
+        <properties/>
+        <value length="7" type="hex" variable_length="false"/>
+      </descriptor>

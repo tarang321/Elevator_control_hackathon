@@ -1,0 +1,5 @@
+<!--Current Time-->
+    <characteristic const="false" id="current_time" name="Current Time" sourceId="org.bluetooth.characteristic.current_time" uuid="2A2B">
+      <value length="10" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

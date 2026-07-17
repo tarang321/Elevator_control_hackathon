@@ -1,0 +1,5 @@
+<!--Environmental Sensing Trigger Setting-->
+      <descriptor const="false" discoverable="true" id="es_trigger_setting" name="Environmental Sensing Trigger Setting" sourceId="org.bluetooth.descriptor.es_trigger_setting" uuid="290D">
+        <properties/>
+        <value length="0" type="hex" variable_length="false"/>
+      </descriptor>

@@ -1,0 +1,8 @@
+<!--Serial Number String-->
+    <characteristic const="false" id="serial_number_string" name="Serial Number String" sourceId="org.bluetooth.characteristic.serial_number_string" uuid="2A25">
+      <informativeText>Abstract: 
+      The value of this characteristic is a variable-length UTF-8 string representing the serial number for a particular instance of the device.            
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

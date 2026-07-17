@@ -1,0 +1,6 @@
+<!--Latitude-->
+    <characteristic const="false" id="latitude" name="Latitude" sourceId="org.bluetooth.characteristic.latitude" uuid="2AAE">
+      <informativeText>Abstract: The Latitude characteristic describes the WGS84 North coordinate of the device.</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

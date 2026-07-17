@@ -1,0 +1,14 @@
+<!--Alert Level-->
+    <characteristic const="false" id="alert_level" name="Alert Level" sourceId="org.bluetooth.characteristic.alert_level" uuid="2A06">
+      <informativeText>Abstract: The level of an alert a device is to sound. If this level is changed while the alert is being sounded, the new level should take effect.
+Summary:             
+    The value of the characteristic shall be an unsigned 8 bit integer that has a fixed point exponent of 0.
+    The Alert Level characteristic defines the level of alert, and is one of the following three values:
+    - Value 0, meaning "No Alert"
+    - Value 1, meaning "Mild Alert"
+    - Value 2, meaning "High Alert"
+    
+Examples: The value 0x01 is interpreted as "Mild Alert"</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,5 @@
+<!--True Wind Speed-->
+    <characteristic const="false" id="true_wind_speed" name="True Wind Speed" sourceId="org.bluetooth.characteristic.true_wind_speed" uuid="2A70">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

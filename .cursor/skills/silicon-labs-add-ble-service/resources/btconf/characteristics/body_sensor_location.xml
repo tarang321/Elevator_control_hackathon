@@ -1,0 +1,5 @@
+<!--Body Sensor Location-->
+    <characteristic const="false" id="body_sensor_location" name="Body Sensor Location" sourceId="org.bluetooth.characteristic.body_sensor_location" uuid="2A38">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

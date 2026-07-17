@@ -1,0 +1,5 @@
+<!--Object List Filter-->
+    <characteristic const="false" id="object_list_filter" name="Object List Filter" sourceId="org.bluetooth.characteristic.object_list_filter" uuid="2AC7">
+      <value length="0" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

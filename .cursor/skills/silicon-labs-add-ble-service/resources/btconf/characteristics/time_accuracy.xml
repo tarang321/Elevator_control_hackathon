@@ -1,0 +1,5 @@
+<!--Time Accuracy-->
+    <characteristic const="false" id="time_accuracy" name="Time Accuracy" sourceId="org.bluetooth.characteristic.time_accuracy" uuid="2A12">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

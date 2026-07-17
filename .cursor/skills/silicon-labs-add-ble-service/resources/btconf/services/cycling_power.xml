@@ -1,0 +1,134 @@
+<!--Cycling Power-->
+<gatt>
+
+  <!--Cycling Power-->
+  <service advertise="false" id="cycling_power" name="Cycling Power" requirement="mandatory" sourceId="org.bluetooth.service.cycling_power" type="primary" uuid="1818">
+    <informativeText>Abstract: This service exposes power- and force-related data and optionally speed- and cadence-related data from a Cycling Power sensor intended for sports and fitness applications.
+Summary: The Cycling Power (CP) Service exposes power- and force-related data and optionally speed- and cadence-related data from a Cycling Power sensor (Server) intended for sports and fitness applications.</informativeText>
+
+    <!--Cycling Power Measurement-->
+    <characteristic const="false" id="cycling_power_measurement" name="Cycling Power Measurement" sourceId="org.bluetooth.characteristic.cycling_power_measurement" uuid="2A63">
+      <informativeText>
+Summary: The Cycling Power Measurement characteristic is a variable length structure containing a Flags field, an Instantaneous Power field and, based on the contents of the Flags field, may contain one or more additional fields as shown in the table below.</informativeText>
+      <value length="34" type="hex" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+
+      <!--Server Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="server_characteristic_configuration" name="Server Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.server_characteristic_configuration" uuid="2903">
+        <informativeText>Abstract: 
+        The Server Characteristic Configuration descriptor defines how the characteristic descriptor is associated with may be configured for the server.
+		
+Summary: 
+        Only one Server Characteristic Configuration descriptor exists in a characteristic definition.
+        A client may write this configuration descriptor to control the configuration of the characteristic on the server for all clients.
+        There is a single instantiation of this descriptor for all clients.
+        Authentication and authorization may be required by the server to write this descriptor.            
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Cycling Power Feature-->
+    <characteristic const="false" id="cycling_power_feature" name="Cycling Power Feature" sourceId="org.bluetooth.characteristic.cycling_power_feature" uuid="2A65">
+      <informativeText>
+Summary: The CP Feature characteristic is used to report a list of features supported by the device.</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Sensor Location-->
+    <characteristic const="false" id="sensor_location" name="Sensor Location" sourceId="org.bluetooth.characteristic.sensor_location" uuid="2A5D">
+      <informativeText>
+Summary: 
+            The Sensor Location characteristic is used to expose the location of the sensor.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Cycling Power Vector-->
+    <characteristic const="false" id="cycling_power_vector" name="Cycling Power Vector" sourceId="org.bluetooth.characteristic.cycling_power_vector" uuid="2A64">
+      <informativeText>
+Summary: The Cycling Power Vector characteristic is a variable length structure containing a Flags fieldand based on the contents of the Flags field, may contain one or more additional fields as shown in the table below.</informativeText>
+      <value length="11" type="hex" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Cycling Power Control Point-->
+    <characteristic const="false" id="cycling_power_control_point" name="Cycling Power Control Point" sourceId="org.bluetooth.characteristic.cycling_power_control_point" uuid="2A66">
+      <informativeText>
+Summary: The Cycling Power Control Point characteristic is used to request a specific function to be executed on the receiving device.</informativeText>
+      <value length="3" type="hex" variable_length="true"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

@@ -1,0 +1,9 @@
+<!--CSC Feature-->
+    <characteristic const="false" id="csc_feature" name="CSC Feature" sourceId="org.bluetooth.characteristic.csc_feature" uuid="2A5C">
+      <informativeText>
+Summary: 
+            The CSC (Cycling Speed and Cadence) Feature characteristic is used to describe the supported features of the Server.
+        </informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,6 @@
+<!--Mesh Provisioning Data Out-->
+    <characteristic const="false" id="mesh_provisioning_data_out" name="Mesh Provisioning Data Out" sourceId="com.silabs.characteristic.mesh_provisioning_data_out" uuid="2ADC">
+      <informativeText>Abstract: The Mesh Provisioning Data Out characteristic can be notified to send a Proxy PDU message containing Provisioning PDU from a Provisioning Server to a Provisioning Client.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

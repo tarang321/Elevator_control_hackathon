@@ -1,0 +1,7 @@
+<!--LN Feature-->
+    <characteristic const="false" id="ln_feature" name="LN Feature" sourceId="org.bluetooth.characteristic.ln_feature" uuid="2A6A">
+      <informativeText>
+Summary: The LN Feature characteristic is used to report a list of features supported by the device.</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

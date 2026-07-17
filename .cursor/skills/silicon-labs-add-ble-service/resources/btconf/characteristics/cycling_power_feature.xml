@@ -1,0 +1,7 @@
+<!--Cycling Power Feature-->
+    <characteristic const="false" id="cycling_power_feature" name="Cycling Power Feature" sourceId="org.bluetooth.characteristic.cycling_power_feature" uuid="2A65">
+      <informativeText>
+Summary: The CP Feature characteristic is used to report a list of features supported by the device.</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,6 @@
+<!--Altitude-->
+    <characteristic const="false" id="altitude" name="Altitude" sourceId="org.bluetooth.characteristic.altitude" uuid="2AB3">
+      <informativeText>Abstract: The Altitude characteristic describes the altitude of the device.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

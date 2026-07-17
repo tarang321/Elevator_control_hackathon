@@ -1,0 +1,81 @@
+<!--HTTP Proxy-->
+<gatt>
+
+  <!--HTTP Proxy-->
+  <service advertise="false" id="http_proxy" name="HTTP Proxy" requirement="mandatory" sourceId="org.bluetooth.service.http_proxy" type="primary" uuid="1823">
+    <informativeText>Abstract: 
+            This service allows a Client device, typically a sensor, to communicate with a Web Server through a gateway device. The gateway device implements the HTTP Proxy Service and therefore provides the services available through the Internet to the Client sensor device.
+        
+Summary: 
+            The HTTP Proxy Service (HPS) allows a device to expose HTTP Web Services to a client. This enables an HPS client device to program a set of characteristics that configures a Hyper Text Transfer Protocol (HTTP) request, initiate this, request, and then read the response.
+        </informativeText>
+
+    <!--URI-->
+    <characteristic const="false" id="uri" name="URI" sourceId="org.bluetooth.characteristic.uri" uuid="2AB6">
+      <informativeText>Abstract: 
+            The Uniform Resource Identifier (URI) Characteristic is used to configure the URI for a subsequent request.
+        </informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--HTTP Headers-->
+    <characteristic const="false" id="http_headers" name="HTTP Headers" sourceId="org.bluetooth.characteristic.http_headers" uuid="2AB7">
+      <informativeText>Abstract: 
+            The HTTP Headers Characteristic is used to hold the headers that would be sent to the HTTP Request or the headers contained within an HTTP response message from the HTTP Server.
+        </informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--HTTP Entity Body-->
+    <characteristic const="false" id="http_entity_body" name="HTTP Entity Body" sourceId="org.bluetooth.characteristic.http_entity_body" uuid="2AB9">
+      <informativeText>Abstract: 
+            The HTTP Entity Body Characteristic contains the contents of the message body after any Transfer Encoding has been applied.
+        </informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--HTTP Control Point-->
+    <characteristic const="false" id="http_control_point" name="HTTP Control Point" sourceId="org.bluetooth.characteristic.http_control_point" uuid="2ABA">
+      <informativeText>Abstract: 
+            The HTTP Control Point is used to initiate a request to send an HTTP request message from the device contgaining the HTTP Proxy Service, acting as an HTTP Client, and an HTTP Server.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--HTTP Status Code-->
+    <characteristic const="false" id="http_status_code" name="HTTP Status Code" sourceId="org.bluetooth.characteristic.http_status_code" uuid="2AB8">
+      <informativeText>Abstract: 
+            The HTTP Status Code characteristic contains the Status-Code from the Status-Line of the first line of the HTTP Response Message, followed by one octet indicating the Data Status Bit Field indicating the status of the data received.
+        </informativeText>
+      <value length="3" type="hex" variable_length="false"/>
+      <properties>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--HTTPS Security-->
+    <characteristic const="false" id="https_security" name="HTTPS Security" sourceId="org.bluetooth.characteristic.https_security" uuid="2ABB">
+      <informativeText>Abstract: 
+            The HTTPS Security characteristic contains the known authenticity of the HTTPS Server certificate for the URI.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

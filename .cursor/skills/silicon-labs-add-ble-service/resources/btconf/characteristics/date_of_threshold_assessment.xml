@@ -1,0 +1,5 @@
+<!--Date of Threshold Assessment-->
+    <characteristic const="false" id="date_of_threshold_assessment" name="Date of Threshold Assessment" sourceId="org.bluetooth.characteristic.date_of_threshold_assessment" uuid="2A86">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

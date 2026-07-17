@@ -1,0 +1,8 @@
+<!--Supported New Alert Category-->
+    <characteristic const="false" id="supported_new_alert_category" name="Supported New Alert Category" sourceId="org.bluetooth.characteristic.supported_new_alert_category" uuid="2A47">
+      <informativeText>Abstract: Category that the server supports for new alert.
+Summary: This characteristic uses the Alert Category ID Bit Mask Characteristic.  If bit(s) is/are set, it means the server supports the corresponded categories for new incoming alert.
+Examples: The value 0x0a is interpreted that this server supports "Call" and "Email" categories.</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

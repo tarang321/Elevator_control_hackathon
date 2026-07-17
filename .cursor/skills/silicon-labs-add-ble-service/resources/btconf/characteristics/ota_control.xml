@@ -1,0 +1,6 @@
+<!--Silicon Labs OTA Control-->
+    <characteristic const="false" id="ota_control" name="Silicon Labs OTA Control" sourceId="com.silabs.characteristic.ota_control" uuid="F7BF3564FB6D4E5388A45E37E0326063">
+      <informativeText>Abstract: Silicon Labs OTA Control.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

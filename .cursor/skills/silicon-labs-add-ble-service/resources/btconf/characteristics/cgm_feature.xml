@@ -1,0 +1,5 @@
+<!--CGM Feature-->
+    <characteristic const="false" id="cgm_feature" name="CGM Feature" sourceId="org.bluetooth.characteristic.cgm_feature" uuid="2AA8">
+      <value length="6" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

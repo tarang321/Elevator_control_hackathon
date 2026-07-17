@@ -1,0 +1,7 @@
+<!--Aggregate-->
+    <characteristic const="false" id="aggregate" name="Aggregate" sourceId="org.bluetooth.characteristic.aggregate" uuid="2A5A">
+      <informativeText>
+Summary: The Aggregate Input is an aggregate of the Digital Input Characteristic value (if available) and ALL Analog Inputs available.</informativeText>
+      <value length="3" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

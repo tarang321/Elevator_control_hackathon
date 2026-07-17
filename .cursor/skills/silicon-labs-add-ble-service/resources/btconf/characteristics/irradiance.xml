@@ -1,0 +1,5 @@
+<!--Irradiance-->
+    <characteristic const="false" id="irradiance" name="Irradiance" sourceId="org.bluetooth.characteristic.irradiance" uuid="2A77">
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

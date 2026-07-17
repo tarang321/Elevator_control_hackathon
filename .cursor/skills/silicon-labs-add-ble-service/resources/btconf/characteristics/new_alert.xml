@@ -1,0 +1,12 @@
+<!--New Alert-->
+    <characteristic const="false" id="new_alert" name="New Alert" sourceId="org.bluetooth.characteristic.new_alert" uuid="2A46">
+      <informativeText>Abstract:             
+       This characteristic defines the category of the alert and how many new alerts of that category have occurred in the server device. Brief text information may also be included for the last alert in the category. 
+        
+Summary: 
+            This characteristic consists of "Category ID", "uint8", and "UTF-8 string" fields. The size of this characteristic is dynamic because of the variable length text ("UTF-8") field. The minimum length of "UTF-8 string" is 0 octets and maximum length of "UTF-8 string" is 18 octets. 
+         
+Examples: The value 0x03, 0x04, 0x52, 0x69, 0x63, 0x68, 0x61, 0x72, 0x64 are interpreted that the server has 4 new email messages and the last message was sent by "Richard".</informativeText>
+      <value length="3" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

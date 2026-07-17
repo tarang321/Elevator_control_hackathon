@@ -1,0 +1,27 @@
+<!--Bond Management Service-->
+<gatt>
+
+  <!--Bond Management Service-->
+  <service advertise="false" id="bond_management" name="Bond Management Service" requirement="mandatory" sourceId="org.bluetooth.service.bond_management" type="primary" uuid="181E">
+    <informativeText>Abstract: This Specification proposes that this service will enable users to manage their bonds on devices with a limited user interface.
+Summary: This service defines how a peer Bluetooth device can manage the storage of bond information, especially the deletion of it, on the Bluetooth device supporting this service.</informativeText>
+
+    <!--Bond Management Control Point-->
+    <characteristic const="false" id="bond_management_control_point" name="Bond Management Control Point" sourceId="org.bluetooth.characteristic.bond_management_control_point" uuid="2AA4">
+      <informativeText>Abstract: The Bond Management Service Control Point (BMSCP) encapsulates functionality and mechanisms to control the bonds of a device. 
+Summary: This control point is used with a service to provide BMS specific functionality and the ability to manage bonds on the device. This includes functions like delete the bond information of the current connection or deletion of the whole bond information. The criterion in the Operand field is defined by the service that references this characteristic</informativeText>
+      <value length="1" type="hex" variable_length="true"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Bond Management Features-->
+    <characteristic const="false" id="bond_management_feature" name="Bond Management Features" sourceId="org.bluetooth.characteristic.bond_management_feature" uuid="2AA5">
+      <value length="3" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

@@ -1,0 +1,8 @@
+<!--Alert Category ID Bit Mask-->
+    <characteristic const="false" id="alert_category_id_bit_mask" name="Alert Category ID Bit Mask" sourceId="org.bluetooth.characteristic.alert_category_id_bit_mask" uuid="2A42">
+      <informativeText>Abstract: Categories of alerts/messages.
+Summary: The value of the characteristic is a bit mask implemented as an array of unsigned 8 bit integers. The Alert Category ID Bit Mask characteristic defines one bit for each predefined category ID.
+Examples: The value 0x03 is interpreted as "Simple Alert and Email bits set"</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

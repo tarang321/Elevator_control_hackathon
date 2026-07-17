@@ -1,0 +1,8 @@
+<!--HTTP Headers-->
+    <characteristic const="false" id="http_headers" name="HTTP Headers" sourceId="org.bluetooth.characteristic.http_headers" uuid="2AB7">
+      <informativeText>Abstract: 
+            The HTTP Headers Characteristic is used to hold the headers that would be sent to the HTTP Request or the headers contained within an HTTP response message from the HTTP Server.
+        </informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

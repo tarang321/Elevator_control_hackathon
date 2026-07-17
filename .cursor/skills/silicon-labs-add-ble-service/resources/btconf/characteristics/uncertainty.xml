@@ -1,0 +1,6 @@
+<!--Uncertainty-->
+    <characteristic const="false" id="uncertainty" name="Uncertainty" sourceId="org.bluetooth.characteristic.uncertainty" uuid="2AB4">
+      <informativeText>Abstract: The Uncertainty characteristic describes the uncertainty of the location information the device exposes.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

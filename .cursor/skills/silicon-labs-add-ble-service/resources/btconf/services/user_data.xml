@@ -1,0 +1,348 @@
+<!--User Data-->
+<gatt>
+
+  <!--User Data-->
+  <service advertise="false" id="user_data" name="User Data" requirement="mandatory" sourceId="org.bluetooth.service.user_data" type="primary" uuid="181C">
+    <informativeText>Abstract: This service exposes user-related data in the sports and fitness environment. This allows remote access and update of user data by a Client as well as the synchronization of user data between a Server and a Client.
+Summary: The User Data Service (UDS) exposes user-related data in the sports and fitness environment. This allows remote access and update of user data by a Client as well as the synchronization of user data between a Server and a Client.</informativeText>
+
+    <!--First Name-->
+    <characteristic const="false" id="first_name" name="First Name" sourceId="org.bluetooth.characteristic.first_name" uuid="2A8A">
+      <informativeText>Abstract: First name of the user. See Note below.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Last Name-->
+    <characteristic const="false" id="last_name" name="Last Name" sourceId="org.bluetooth.characteristic.last_name" uuid="2A90">
+      <informativeText>Abstract: Last name of the user. See Note below.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Email Address-->
+    <characteristic const="false" id="email_address" name="Email Address" sourceId="org.bluetooth.characteristic.email_address" uuid="2A87">
+      <informativeText>Abstract: Email address of the user. See Note below.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Age-->
+    <characteristic const="false" id="age" name="Age" sourceId="org.bluetooth.characteristic.age" uuid="2A80">
+      <informativeText>Abstract: Age of the User.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Date of Birth-->
+    <characteristic const="false" id="date_of_birth" name="Date of Birth" sourceId="org.bluetooth.characteristic.date_of_birth" uuid="2A85">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Gender-->
+    <characteristic const="false" id="gender" name="Gender" sourceId="org.bluetooth.characteristic.gender" uuid="2A8C">
+      <informativeText>Abstract: Gender of the user. The value of the Gender characteristic are defined below: 0:male,1:female, 2:Unspecified,3-225: RFU</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Weight-->
+    <characteristic const="false" id="weight" name="Weight" sourceId="org.bluetooth.characteristic.weight" uuid="2A98">
+      <informativeText>Abstract: Weight of the User</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Height-->
+    <characteristic const="false" id="height" name="Height" sourceId="org.bluetooth.characteristic.height" uuid="2A8E">
+      <informativeText>Abstract: Height of the User</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--VO2 Max-->
+    <characteristic const="false" id="vo2_max" name="VO2 Max" sourceId="org.bluetooth.characteristic.vo2_max" uuid="2A96">
+      <informativeText>Abstract: Maximal Oxygen uptake of a user</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Heart Rate Max-->
+    <characteristic const="false" id="heart_rate_max" name="Heart Rate Max" sourceId="org.bluetooth.characteristic.heart_rate_max" uuid="2A8D">
+      <informativeText>Abstract: Maximum heart rate a user can reach.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Resting Heart Rate-->
+    <characteristic const="false" id="resting_heart_rate" name="Resting Heart Rate" sourceId="org.bluetooth.characteristic.resting_heart_rate" uuid="2A92">
+      <informativeText>Abstract: Lowest Heart Rate a user can reach</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Maximum Recommended Heart Rate-->
+    <characteristic const="false" id="maximum_recommended_heart_rate" name="Maximum Recommended Heart Rate" sourceId="org.bluetooth.characteristic.maximum_recommended_heart_rate" uuid="2A91">
+      <informativeText>Abstract: Maximum recommended heart rate is a threshold that may be set to limit exertion. The maximum recommended heart rate is smaller or equal to the maximal heart rate a user can reach.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Aerobic Threshold-->
+    <characteristic const="false" id="aerobic_threshold" name="Aerobic Threshold" sourceId="org.bluetooth.characteristic.aerobic_threshold" uuid="2A7F">
+      <informativeText>Abstract: First metabolic threshold.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Anaerobic Threshold-->
+    <characteristic const="false" id="anaerobic_threshold" name="Anaerobic Threshold" sourceId="org.bluetooth.characteristic.anaerobic_threshold" uuid="2A83">
+      <informativeText>Abstract: Second metabolic threshold</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Sport Type for Aerobic and Anaerobic Thresholds-->
+    <characteristic const="false" id="sport_type_for_aerobic_and_anaerobic_thresholds" name="Sport Type for Aerobic and Anaerobic Thresholds" sourceId="org.bluetooth.characteristic.sport_type_for_aerobic_and_anaerobic_thresholds" uuid="2A93">
+      <informativeText>Abstract:  Sport type enumeration(See note below). The values of the Sport Type for Aerobic and Anaerobic Thresholds characteristic are defined below</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Date of Threshold Assessment-->
+    <characteristic const="false" id="date_of_threshold_assessment" name="Date of Threshold Assessment" sourceId="org.bluetooth.characteristic.date_of_threshold_assessment" uuid="2A86">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Waist Circumference-->
+    <characteristic const="false" id="waist_circumference" name="Waist Circumference" sourceId="org.bluetooth.characteristic.waist_circumference" uuid="2A97">
+      <informativeText>Abstract: Used with the Hip Circumference value to calculate the Waist to Hip Ratio (WHR)</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Hip Circumference-->
+    <characteristic const="false" id="hip_circumference" name="Hip Circumference" sourceId="org.bluetooth.characteristic.hip_circumference" uuid="2A8F">
+      <informativeText>Abstract: Used with the Waist Circumference value to calculate the Waist to Hip Ratio (WHR)</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Fat Burn Heart Rate Lower Limit-->
+    <characteristic const="false" id="fat_burn_heart_rate_lower_limit" name="Fat Burn Heart Rate Lower Limit" sourceId="org.bluetooth.characteristic.fat_burn_heart_rate_lower_limit" uuid="2A88">
+      <informativeText>Abstract: Lower limit of the heart rate where the user maximizes the fat burn while exersizing</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Fat Burn Heart Rate Upper Limit-->
+    <characteristic const="false" id="fat_burn_heart_rate_upper_limit" name="Fat Burn Heart Rate Upper Limit" sourceId="org.bluetooth.characteristic.fat_burn_heart_rate_upper_limit" uuid="2A89">
+      <informativeText>Abstract: Upper limit of the heart rate where the user maximizes the fat burn while exersizing</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Aerobic Heart Rate Lower Limit-->
+    <characteristic const="false" id="aerobic_heart_rate_lower_limit" name="Aerobic Heart Rate Lower Limit" sourceId="org.bluetooth.characteristic.aerobic_heart_rate_lower_limit" uuid="2A7E">
+      <informativeText>Abstract: Lower limit of the heart rate where the user enhances his endurance while exercising</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Aerobic Heart Rate Upper Limit-->
+    <characteristic const="false" id="aerobic_heart_rate_upper_limit" name="Aerobic Heart Rate Upper Limit" sourceId="org.bluetooth.characteristic.aerobic_heart_rate_upper_limit" uuid="2A84">
+      <informativeText>Abstract: Upper limit of the heart rate where the user enhances his endurance while exercising</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Anaerobic Heart Rate Lower Limit-->
+    <characteristic const="false" id="anaerobic_heart_rate_lower_limit" name="Anaerobic Heart Rate Lower Limit" sourceId="org.bluetooth.characteristic.anaerobic_heart_rate_lower_limit" uuid="2A81">
+      <informativeText>Abstract: Lower limit of the heart rate where the user enhances his anaerobic tolerance while exercising.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Anaerobic Heart Rate Upper Limit-->
+    <characteristic const="false" id="anaerobic_heart_rate_upper_limit" name="Anaerobic Heart Rate Upper Limit" sourceId="org.bluetooth.characteristic.anaerobic_heart_rate_upper_limit" uuid="2A82">
+      <informativeText>Abstract: Upper limit of the heart rate where the user enhances his anaerobic tolerance while exercising.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Five Zone Heart Rate Limits-->
+    <characteristic const="false" id="five_zone_heart_rate_limits" name="Five Zone Heart Rate Limits" sourceId="org.bluetooth.characteristic.five_zone_heart_rate_limits" uuid="2A8B">
+      <informativeText>Abstract: Data structure containing the limits between the heart rate zones for the 5-zone heart rate definition (Maximum, Hard, Moderate, Light and Very Light).</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Three Zone Heart Rate Limits-->
+    <characteristic const="false" id="three_zone_heart_rate_limits" name="Three Zone Heart Rate Limits" sourceId="org.bluetooth.characteristic.three_zone_heart_rate_limits" uuid="2A94">
+      <informativeText>Abstract: Data structure containing the limits between the heart rate zones for the 3-zone heart rate definition (Hard, Moderate and Light).</informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Two Zone Heart Rate Limit-->
+    <characteristic const="false" id="two_zone_heart_rate_limit" name="Two Zone Heart Rate Limit" sourceId="org.bluetooth.characteristic.two_zone_heart_rate_limit" uuid="2A95">
+      <informativeText>Abstract: Heart rate limit between the heart rate zones for the 2-zone heart rate definition (Fitness and Fat Burn).</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Database Change Increment-->
+    <characteristic const="false" id="database_change_increment" name="Database Change Increment" sourceId="org.bluetooth.characteristic.database_change_increment" uuid="2A99">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--User Index-->
+    <characteristic const="false" id="user_index" name="User Index" sourceId="org.bluetooth.characteristic.user_index" uuid="2A9A">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--User Control Point-->
+    <characteristic const="false" id="user_control_point" name="User Control Point" sourceId="org.bluetooth.characteristic.user_control_point" uuid="2A9F">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Language-->
+    <characteristic const="false" id="language" name="Language" sourceId="org.bluetooth.characteristic.language" uuid="2AA2">
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

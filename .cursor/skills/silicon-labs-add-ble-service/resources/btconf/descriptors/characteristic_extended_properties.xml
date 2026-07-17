@@ -1,0 +1,13 @@
+<!--Characteristic Extended Properties-->
+      <descriptor const="false" discoverable="true" id="characteristic_extended_properties" name="Characteristic Extended Properties" sourceId="org.bluetooth.descriptor.gatt.characteristic_extended_properties" uuid="2900">
+        <informativeText>Abstract: 
+        The Characteristic Extended Properties descriptor defines additional Characteristic Properties.            
+		
+Summary: 
+        If the Characteristic Extended Properties bit of the Characteristic Properties is set, then this descriptor exists.
+        The Characteristic Extended Properties descriptor is a bit field defining Reliable Write and Writeable Auxiliaries are enabled for the Characteristic.
+        This descriptor is readable without authentication and authorization being required.            
+		</informativeText>
+        <properties/>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>

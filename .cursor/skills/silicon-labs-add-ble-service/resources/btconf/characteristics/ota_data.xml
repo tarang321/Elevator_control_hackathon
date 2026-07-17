@@ -1,0 +1,6 @@
+<!--Silicon Labs OTA Data-->
+    <characteristic const="false" id="ota_data" name="Silicon Labs OTA Data" sourceId="com.silabs.characteristic.ota_data" uuid="984227F334FC4045A5D02C581F81A153">
+      <informativeText>Abstract: Silicon Labs OTA Data.</informativeText>
+      <value length="20" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

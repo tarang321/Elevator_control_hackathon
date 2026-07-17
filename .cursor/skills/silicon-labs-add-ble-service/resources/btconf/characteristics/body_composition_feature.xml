@@ -1,0 +1,5 @@
+<!--Body Composition Feature-->
+    <characteristic const="false" id="body_composition_feature" name="Body Composition Feature" sourceId="org.bluetooth.characteristic.body_composition_feature" uuid="2A9B">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

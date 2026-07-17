@@ -1,0 +1,5 @@
+<!--Barometric Pressure Trend-->
+    <characteristic const="false" id="barometric_pressure_trend" name="Barometric Pressure Trend" sourceId="org.bluetooth.characteristic.barometric_pressure_trend" uuid="2AA3">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

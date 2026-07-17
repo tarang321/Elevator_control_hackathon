@@ -1,0 +1,6 @@
+<!--Age-->
+    <characteristic const="false" id="age" name="Age" sourceId="org.bluetooth.characteristic.age" uuid="2A80">
+      <informativeText>Abstract: Age of the User.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,6 @@
+<!--Aerobic Threshold-->
+    <characteristic const="false" id="aerobic_threshold" name="Aerobic Threshold" sourceId="org.bluetooth.characteristic.aerobic_threshold" uuid="2A7F">
+      <informativeText>Abstract: First metabolic threshold.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,6 @@
+<!--Indoor Positioning Configuration-->
+    <characteristic const="false" id="indoor_positioning_configuration" name="Indoor Positioning Configuration" sourceId="org.bluetooth.characteristic.indoor_positioning_configuration" uuid="2AAD">
+      <informativeText>Abstract: The Indoor Positioning Configuration describes the set of characteristic values included in the Indoor Positioning Service AD type.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

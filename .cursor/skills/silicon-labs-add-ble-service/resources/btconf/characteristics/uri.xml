@@ -1,0 +1,8 @@
+<!--URI-->
+    <characteristic const="false" id="uri" name="URI" sourceId="org.bluetooth.characteristic.uri" uuid="2AB6">
+      <informativeText>Abstract: 
+            The Uniform Resource Identifier (URI) Characteristic is used to configure the URI for a subsequent request.
+        </informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

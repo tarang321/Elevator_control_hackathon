@@ -1,0 +1,8 @@
+<!--Blood Pressure Measurement-->
+    <characteristic const="false" id="blood_pressure_measurement" name="Blood Pressure Measurement" sourceId="org.bluetooth.characteristic.blood_pressure_measurement" uuid="2A35">
+      <informativeText>Abstract: 
+        The Blood Pressure Measurement characteristic is a variable length structure containing a Flags field, a Blood Pressure Measurement Compound Value field, and contains additional fields such as Time Stamp, Pulse Rate and User ID as determined by the contents of the Flags field.            
+		</informativeText>
+      <value length="25" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,9 @@
+<!--Hardware Revision String-->
+    <characteristic const="false" id="hardware_revision_string" name="Hardware Revision String" sourceId="org.bluetooth.characteristic.hardware_revision_string" uuid="2A27">
+      <informativeText>
+Summary: 
+      The value of this characteristic is a UTF-8 string representing the hardware revision for the hardware within the device.
+		</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

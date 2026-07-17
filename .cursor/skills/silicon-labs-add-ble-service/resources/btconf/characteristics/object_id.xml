@@ -1,0 +1,5 @@
+<!--Object ID-->
+    <characteristic const="false" id="object_id" name="Object ID" sourceId="org.bluetooth.characteristic.object_id" uuid="2AC3">
+      <value length="6" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

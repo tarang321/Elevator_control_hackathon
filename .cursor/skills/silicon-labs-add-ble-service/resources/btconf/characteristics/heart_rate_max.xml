@@ -1,0 +1,6 @@
+<!--Heart Rate Max-->
+    <characteristic const="false" id="heart_rate_max" name="Heart Rate Max" sourceId="org.bluetooth.characteristic.heart_rate_max" uuid="2A8D">
+      <informativeText>Abstract: Maximum heart rate a user can reach.</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

@@ -1,0 +1,11 @@
+<!--HID Information-->
+    <characteristic const="false" id="hid_information" name="HID Information" sourceId="org.bluetooth.characteristic.hid_information" uuid="2A4A">
+      <informativeText>Abstract: 
+    The HID Information Characteristic returns the HID attributes when read.
+		
+Summary: 
+    The HID Information Characteristic contains the HID attributes.  The value of this Characteristic is static and can be cached for the lifetime of the bond between the HID device and the HID host.
+		</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

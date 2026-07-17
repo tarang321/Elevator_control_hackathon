@@ -1,0 +1,5 @@
+<!--Language-->
+    <characteristic const="false" id="language" name="Language" sourceId="org.bluetooth.characteristic.language" uuid="2AA2">
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

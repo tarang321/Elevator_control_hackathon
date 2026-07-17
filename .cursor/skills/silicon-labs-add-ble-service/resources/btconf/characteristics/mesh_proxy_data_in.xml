@@ -1,0 +1,6 @@
+<!--Mesh Proxy Data In-->
+    <characteristic const="false" id="mesh_proxy_data_in" name="Mesh Proxy Data In" sourceId="com.silabs.characteristic.mesh_proxy_data_in" uuid="2ADD">
+      <informativeText>Abstract: The Mesh Proxy Data In characteristic is used by the client to send Proxy PDUs to the server</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

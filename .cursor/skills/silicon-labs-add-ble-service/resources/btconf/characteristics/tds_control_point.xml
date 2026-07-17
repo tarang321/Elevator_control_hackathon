@@ -1,0 +1,9 @@
+<!--TDS Control Point-->
+    <characteristic const="false" id="tds_control_point" name="TDS Control Point" sourceId="org.bluetooth.characteristic.tds_control_point" uuid="2ABC">
+      <informativeText>
+Summary: 
+         The TDS Control Point characteristic is defined in the Transport Discovery Service, Section 4.1 and its sub-sections.
+		</informativeText>
+      <value length="0" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

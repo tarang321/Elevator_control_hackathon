@@ -1,0 +1,7 @@
+<!--Cycling Power Control Point-->
+    <characteristic const="false" id="cycling_power_control_point" name="Cycling Power Control Point" sourceId="org.bluetooth.characteristic.cycling_power_control_point" uuid="2A66">
+      <informativeText>
+Summary: The Cycling Power Control Point characteristic is used to request a specific function to be executed on the receiving device.</informativeText>
+      <value length="3" type="hex" variable_length="true"/>
+      <properties/>
+    </characteristic>

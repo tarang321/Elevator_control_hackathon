@@ -1,0 +1,9 @@
+<!--Boot Mouse Input Report-->
+    <characteristic const="false" id="boot_mouse_input_report" name="Boot Mouse Input Report" sourceId="org.bluetooth.characteristic.boot_mouse_input_report" uuid="2A33">
+      <informativeText>
+Summary: 
+            The Boot Mouse Input Report characteristic is used to transfer fixed format and length Input Report data between a HID Host operating in Boot Protocol Mode and a HID Service corresponding to a boot mouse.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

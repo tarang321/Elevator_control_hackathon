@@ -1,0 +1,6 @@
+<!--Aerobic Heart Rate Upper Limit-->
+    <characteristic const="false" id="aerobic_heart_rate_upper_limit" name="Aerobic Heart Rate Upper Limit" sourceId="org.bluetooth.characteristic.aerobic_heart_rate_upper_limit" uuid="2A84">
+      <informativeText>Abstract: Upper limit of the heart rate where the user enhances his endurance while exercising</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

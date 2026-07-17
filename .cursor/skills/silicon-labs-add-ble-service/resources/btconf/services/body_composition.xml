@@ -1,0 +1,43 @@
+<!--Body Composition-->
+<gatt>
+
+  <!--Body Composition-->
+  <service advertise="false" id="body_composition" name="Body Composition" requirement="mandatory" sourceId="org.bluetooth.service.body_composition" type="primary" uuid="181B">
+    <informativeText>Abstract: This service exposes data related to body composition from a body composition analyzer intended for consumer healthcare and sports/fitness applications.
+Summary: The Body Composition Service (BCS) exposes data related to body composition from a body composition analyzer (Server) intended for consumer healthcare as well as sports/fitness applications.</informativeText>
+
+    <!--Body Composition Feature-->
+    <characteristic const="false" id="body_composition_feature" name="Body Composition Feature" sourceId="org.bluetooth.characteristic.body_composition_feature" uuid="2A9B">
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Body Composition Measurement-->
+    <characteristic const="false" id="body_composition_measurement" name="Body Composition Measurement" sourceId="org.bluetooth.characteristic.body_composition_measurement" uuid="2A9C">
+      <value length="42" type="hex" variable_length="false"/>
+      <properties>
+        <indicate authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+  </service>
+</gatt>

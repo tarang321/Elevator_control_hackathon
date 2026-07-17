@@ -1,0 +1,11 @@
+<!--IEEE 11073-20601 Regulatory Certification Data List-->
+    <characteristic const="false" id="ieee_11073_20601_regulatory_certification_data_list" name="IEEE 11073-20601 Regulatory Certification Data List" sourceId="org.bluetooth.characteristic.ieee_11073-20601_regulatory_certification_data_list" uuid="2A2A">
+      <informativeText>Abstract: The value of the characteristic is an opaque structure listing various regulatory and/or certification compliance items to which the device claims adherence.
+Summary: 
+      The content of this characteristic is determined by the Authorizing Organization that provides Certifications. Refer to 11073-20601 [1] or Continua Design Guidelines [2] for more information on the format of this list.
+       [1]	IEEE Std 11073-20601 - 2008 Health Informatics - Personal Health Device Communication - Application Profile - Optimized Exchange Protocol - version 1.0 or later
+       [2]	Continua Design Guidelines - Continua Health Alliance; http://www.continuaalliance.org
+    </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

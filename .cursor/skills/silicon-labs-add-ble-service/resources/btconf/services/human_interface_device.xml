@@ -1,0 +1,196 @@
+<!--Human Interface Device-->
+<gatt>
+
+  <!--Human Interface Device-->
+  <service advertise="false" id="human_interface_device" name="Human Interface Device" requirement="mandatory" sourceId="org.bluetooth.service.human_interface_device" type="primary" uuid="1812">
+    <informativeText>Abstract: This service exposes the HID reports and other HID data intended for HID Hosts and HID Devices.
+Summary: The HID Service exposes characteristics required for a HID Device to transfer HID report descriptors and reports to a HID Host. This also exposes the characteristics for a HID Host to write to a Device. The Human Interface Device Service is instantiated as a Primary Service. </informativeText>
+
+    <!--Protocol Mode-->
+    <characteristic const="false" id="protocol_mode" name="Protocol Mode" sourceId="org.bluetooth.characteristic.protocol_mode" uuid="2A4E">
+      <informativeText>
+Summary: 
+             The Protocol Mode characteristic is used to expose the current protocol mode of the HID Service with which it is associated, or to set the desired protocol mode of the HID Service.
+		</informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Report-->
+    <characteristic const="false" id="report" name="Report" sourceId="org.bluetooth.characteristic.report" uuid="2A4D">
+      <informativeText>Abstract: 
+      The Report characteristic is used to exchange data between a HID Device and a HID Host.
+		
+Summary: 
+      The Report characteristic value contains Input Report, Output Report or Feature Report data to be transferred between the HID Device and HID Host.
+    </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+
+      <!--Report Reference-->
+      <descriptor const="false" discoverable="true" id="report_reference" name="Report Reference" sourceId="org.bluetooth.descriptor.report_reference" uuid="2908">
+        <informativeText>
+Summary: 
+        Mapping information in the form of a Report ID and Report Type which maps the current parent characteristic to the Report ID(s) and Report Type (s) defined within the Report Map characteristic.  
+	</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Report Map-->
+    <characteristic const="false" id="report_map" name="Report Map" sourceId="org.bluetooth.characteristic.report_map" uuid="2A4B">
+      <informativeText>
+Summary: 
+      The Report Map characteristic is used to define formatting information for Input Report, Output Report, and Feature Report data transferred between a HID Device and HID Host, information on how this data can be used, and other information regarding physical aspects of the device (i.e. that the device functions as a keyboard, for example, or has multiple functions such as a keyboard and volume controls).
+      Only a single instance of this characteristic exists as part of a HID Service.
+    </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--External Report Reference-->
+      <descriptor const="false" discoverable="true" id="external_report_reference" name="External Report Reference" sourceId="org.bluetooth.descriptor.external_report_reference" uuid="2907">
+        <informativeText>
+Summary: 
+        The External Report Reference characteristic descriptor allows a HID Host to map information from the Report Map characteristic value for Input Report, Output Report or Feature Report data to the Characteristic UUID of external service characteristics used to transfer the associated data.
+	</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Boot Keyboard Input Report-->
+    <characteristic const="false" id="boot_keyboard_input_report" name="Boot Keyboard Input Report" sourceId="org.bluetooth.characteristic.boot_keyboard_input_report" uuid="2A22">
+      <informativeText>
+Summary: 
+            The Boot Keyboard Input Report characteristic is used to transfer fixed format and length Input Report data between a HID Host operating in Boot Protocol Mode and a HID Service corresponding to a boot keyboard.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--Boot Keyboard Output Report-->
+    <characteristic const="false" id="boot_keyboard_output_report" name="Boot Keyboard Output Report" sourceId="org.bluetooth.characteristic.boot_keyboard_output_report" uuid="2A32">
+      <informativeText>
+Summary: 
+            The Boot Keyboard Output Report characteristic is used to transfer fixed format and length Output Report data between a HID Host operating in Boot Protocol Mode and a HID Service corresponding to a boot keyboard.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <write authenticated="false" bonded="false" encrypted="false"/>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--Boot Mouse Input Report-->
+    <characteristic const="false" id="boot_mouse_input_report" name="Boot Mouse Input Report" sourceId="org.bluetooth.characteristic.boot_mouse_input_report" uuid="2A33">
+      <informativeText>
+Summary: 
+            The Boot Mouse Input Report characteristic is used to transfer fixed format and length Input Report data between a HID Host operating in Boot Protocol Mode and a HID Service corresponding to a boot mouse.
+        </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+
+      <!--Client Characteristic Configuration-->
+      <descriptor const="false" discoverable="true" id="client_characteristic_configuration" name="Client Characteristic Configuration" sourceId="org.bluetooth.descriptor.gatt.client_characteristic_configuration" uuid="2902">
+        <informativeText>Abstract: 
+        The Client Characteristic Configuration descriptor defines how the characteristic may be configured by a specific client.            
+		
+Summary: 
+        This descriptor shall be persistent across connections for bonded devices.
+        The Client Characteristic Configuration descriptor is unique for each client. A client may read and write this descriptor to determine and set the configuration for that client.
+        Authentication and authorization may be required by the server to write this descriptor.
+        The default value for the Client Characteristic Configuration descriptor is 0x00. Upon connection of non-binded clients, this descriptor is set to the default value.
+		</informativeText>
+        <properties>
+          <read authenticated="false" bonded="false" encrypted="false"/>
+          <write authenticated="false" bonded="false" encrypted="false"/>
+        </properties>
+        <value length="2" type="hex" variable_length="false"/>
+      </descriptor>
+    </characteristic>
+
+    <!--HID Information-->
+    <characteristic const="false" id="hid_information" name="HID Information" sourceId="org.bluetooth.characteristic.hid_information" uuid="2A4A">
+      <informativeText>Abstract: 
+    The HID Information Characteristic returns the HID attributes when read.
+		
+Summary: 
+    The HID Information Characteristic contains the HID attributes.  The value of this Characteristic is static and can be cached for the lifetime of the bond between the HID device and the HID host.
+		</informativeText>
+      <value length="4" type="hex" variable_length="false"/>
+      <properties>
+        <read authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+
+    <!--HID Control Point-->
+    <characteristic const="false" id="hid_control_point" name="HID Control Point" sourceId="org.bluetooth.characteristic.hid_control_point" uuid="2A4C">
+      <informativeText>
+Summary: 
+        The HID Control Point characteristic is a control-point attribute that defines the following HID Commands when written:
+            - Suspend ( Refer to Section 7.4.2, Bluetooth HID Profile Specification 1.0
+            - Exit Suspend (Refer to Section 7.4.2, Bluetooth HID Profile Specification 1.0
+    </informativeText>
+      <value length="1" type="hex" variable_length="false"/>
+      <properties>
+        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
+      </properties>
+    </characteristic>
+  </service>
+</gatt>

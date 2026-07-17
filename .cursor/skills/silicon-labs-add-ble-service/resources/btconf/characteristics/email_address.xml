@@ -1,0 +1,6 @@
+<!--Email Address-->
+    <characteristic const="false" id="email_address" name="Email Address" sourceId="org.bluetooth.characteristic.email_address" uuid="2A87">
+      <informativeText>Abstract: Email address of the user. See Note below.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

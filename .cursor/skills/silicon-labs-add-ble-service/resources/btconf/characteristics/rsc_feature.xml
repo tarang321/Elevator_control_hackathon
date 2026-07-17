@@ -1,0 +1,9 @@
+<!--RSC Feature-->
+    <characteristic const="false" id="rsc_feature" name="RSC Feature" sourceId="org.bluetooth.characteristic.rsc_feature" uuid="2A54">
+      <informativeText>
+Summary: 
+            The RSC (Running Speed and Cadence) Feature characteristic is used to describe the supported features of the Server.
+        </informativeText>
+      <value length="2" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

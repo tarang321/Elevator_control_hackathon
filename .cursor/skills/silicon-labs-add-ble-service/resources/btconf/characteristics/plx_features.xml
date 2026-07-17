@@ -1,0 +1,7 @@
+<!--PLX Features-->
+    <characteristic const="false" id="plx_features" name="PLX Features" sourceId="org.bluetooth.characteristic.plx_features" uuid="2A60">
+      <informativeText>
+Summary: The PLX Features characteristic is used to describe the supported features of the Server. Included in the characteristic is a PLX Features field, and, depending on the contents of the PLX Features field, the Measurement Status Support field, and the Device and Sensor Status Support field.</informativeText>
+      <value length="7" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

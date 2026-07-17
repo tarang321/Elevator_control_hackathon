@@ -1,0 +1,5 @@
+<!--Dew Point-->
+    <characteristic const="false" id="dew_point" name="Dew Point" sourceId="org.bluetooth.characteristic.dew_point" uuid="2A7B">
+      <value length="1" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

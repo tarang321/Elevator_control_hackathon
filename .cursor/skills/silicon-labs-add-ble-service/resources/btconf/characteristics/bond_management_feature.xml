@@ -1,0 +1,5 @@
+<!--Bond Management Features-->
+    <characteristic const="false" id="bond_management_feature" name="Bond Management Features" sourceId="org.bluetooth.characteristic.bond_management_feature" uuid="2AA5">
+      <value length="3" type="hex" variable_length="false"/>
+      <properties/>
+    </characteristic>

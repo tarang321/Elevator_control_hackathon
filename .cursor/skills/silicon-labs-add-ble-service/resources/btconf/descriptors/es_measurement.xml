@@ -1,0 +1,5 @@
+<!--Environmental Sensing Measurement-->
+      <descriptor const="false" discoverable="true" id="es_measurement" name="Environmental Sensing Measurement" sourceId="org.bluetooth.descriptor.es_measurement" uuid="290C">
+        <properties/>
+        <value length="0" type="hex" variable_length="false"/>
+      </descriptor>

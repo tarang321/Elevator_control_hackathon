@@ -1,0 +1,6 @@
+<!--Location Name-->
+    <characteristic const="false" id="location_name" name="Location Name" sourceId="org.bluetooth.characteristic.location_name" uuid="2AB5">
+      <informativeText>Abstract: The Location Name characteristic describes the name of the location the device is installed in.</informativeText>
+      <value length="1" type="utf-8" variable_length="false"/>
+      <properties/>
+    </characteristic>

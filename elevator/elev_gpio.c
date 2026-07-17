@@ -1,12 +1,27 @@
 /***************************************************************************//**
  * @file elev_gpio.c
- * @brief GPIO instrumentation (short set/clear pulses and levels)
+ * @brief GPIO instrumentation for ISR / task / semaphore / DMA visibility
+ *******************************************************************************
+ * Map (placeholders — see docs/ARCHITECTURE.md):
+ *   PC00 pulse  RX ISR active
+ *   PC01 pulse  Command complete (EOL)
+ *   PC02 level  Parser task active
+ *   PC03 level  Elevator task active
+ *   PC04 level  Entry blocked (waitQ non-empty)
+ *   PC05 pulse  Semaphore give
+ *   PC06 pulse  Semaphore take
+ *   PC07 level  LDMA TX active
+ *   PD02 pulse  LDMA TX complete
  ******************************************************************************/
 #include "elev_gpio.h"
+
 #include "sl_gpio.h"
 #include "sl_clock_manager.h"
 
-/* Placeholder map — document in ARCHITECTURE.md */
+/*******************************************************************************
+ ***************************   LOCAL VARIABLES   *******************************
+ ******************************************************************************/
+
 static const sl_gpio_t pin_rx_isr     = { .port = SL_GPIO_PORT_C, .pin = 0 };
 static const sl_gpio_t pin_cmd_done   = { .port = SL_GPIO_PORT_C, .pin = 1 };
 static const sl_gpio_t pin_parser     = { .port = SL_GPIO_PORT_C, .pin = 2 };
@@ -16,6 +31,17 @@ static const sl_gpio_t pin_sem_give   = { .port = SL_GPIO_PORT_C, .pin = 5 };
 static const sl_gpio_t pin_sem_take   = { .port = SL_GPIO_PORT_C, .pin = 6 };
 static const sl_gpio_t pin_dma_active = { .port = SL_GPIO_PORT_C, .pin = 7 };
 static const sl_gpio_t pin_dma_done   = { .port = SL_GPIO_PORT_D, .pin = 2 };
+
+/*******************************************************************************
+ *********************   LOCAL FUNCTION PROTOTYPES   ***************************
+ ******************************************************************************/
+
+static void cfg_out(const sl_gpio_t *g);
+static void pulse(const sl_gpio_t *g);
+
+/*******************************************************************************
+ **************************   LOCAL FUNCTIONS   ********************************
+ ******************************************************************************/
 
 static void cfg_out(const sl_gpio_t *g)
 {
@@ -27,6 +53,10 @@ static void pulse(const sl_gpio_t *g)
   sl_gpio_set_pin(g);
   sl_gpio_clear_pin(g);
 }
+
+/*******************************************************************************
+ **************************   GLOBAL FUNCTIONS   *******************************
+ ******************************************************************************/
 
 void elev_gpio_init(void)
 {

@@ -1,6 +1,8 @@
 /***************************************************************************//**
  * @file elev_ctrl.c
- * @brief Elevator capacity: partial board + FIFO wait remainder
+ * @brief Capacity logic: sem_capacity, mtx_state, waitQ (partial board)
+ *******************************************************************************
+ * NEVER block on semaphore take for ENTER (deadlock trap). Remainder → waitQ.
  ******************************************************************************/
 #include "elev_ctrl.h"
 #include "elev_tx.h"
@@ -15,21 +17,46 @@
 #include "queue.h"
 #include "semphr.h"
 
+/*******************************************************************************
+ *******************************   DEFINES   ***********************************
+ ******************************************************************************/
+
 #define ELEV_CTRL_STACK  320
 #define ELEV_CTRL_PRIO   (tskIDLE_PRIORITY + 2)
+
+/*******************************************************************************
+ ***************************   LOCAL VARIABLES   *******************************
+ ******************************************************************************/
 
 static QueueHandle_t s_req_q;
 static QueueHandle_t s_wait_q;
 static SemaphoreHandle_t s_sem_capacity;
 static SemaphoreHandle_t s_mtx_state;
 static uint16_t s_occupancy;
+static uint16_t s_waiting_total;
+
+/*******************************************************************************
+ *********************   LOCAL FUNCTION PROTOTYPES   ***************************
+ ******************************************************************************/
+
+static uint16_t free_seats(void);
+static void update_blocked_gpio(void);
+static void claim_seats(uint16_t board);
+static void board_passengers(uint16_t n);
+static void drain_wait_queue(void);
+static void handle_exit(uint16_t n);
+static void handle_status(void);
+static void handle_help(void);
+static void ctrl_task(void *arg);
+
+/*******************************************************************************
+ **************************   LOCAL FUNCTIONS   ********************************
+ ******************************************************************************/
 
 static uint16_t free_seats(void)
 {
   return (uint16_t)uxSemaphoreGetCount(s_sem_capacity);
 }
-
-static uint16_t s_waiting_total;
 
 static void update_blocked_gpio(void)
 {
@@ -84,8 +111,12 @@ static void drain_wait_queue(void)
 {
   char msg[ELEV_TX_MSG_MAX];
 
-  while (s_waiting_total > 0U && free_seats() > 0U) {
+  while ((s_waiting_total > 0U) && (free_seats() > 0U)) {
     uint16_t head = 0;
+    uint16_t free;
+    uint16_t board;
+    uint16_t left;
+
     if (xQueueReceive(s_wait_q, &head, 0) != pdTRUE) {
       break;
     }
@@ -93,9 +124,9 @@ static void drain_wait_queue(void)
       continue;
     }
 
-    uint16_t free = free_seats();
-    uint16_t board = (head < free) ? head : free;
-    uint16_t left = (uint16_t)(head - board);
+    free = free_seats();
+    board = (head < free) ? head : free;
+    left = (uint16_t)(head - board);
 
     if (board > 0U) {
       claim_seats(board);
@@ -110,9 +141,7 @@ static void drain_wait_queue(void)
     }
 
     if (left > 0U) {
-      /* Push remainder back to front: use send-to-front */
       if (xQueueSendToFront(s_wait_q, &left, 0) != pdTRUE) {
-        /* Should not happen — restore count */
         s_waiting_total = (uint16_t)(s_waiting_total + left);
         elev_tx_print("Error: wait queue full.\r\n");
         break;
@@ -125,9 +154,10 @@ static void drain_wait_queue(void)
 static void handle_exit(uint16_t n)
 {
   char msg[ELEV_TX_MSG_MAX];
+  uint16_t occ;
 
   xSemaphoreTake(s_mtx_state, portMAX_DELAY);
-  uint16_t occ = s_occupancy;
+  occ = s_occupancy;
   xSemaphoreGive(s_mtx_state);
 
   if (n > occ) {
@@ -160,10 +190,13 @@ static void handle_exit(uint16_t n)
 static void handle_status(void)
 {
   char msg[ELEV_TX_MSG_MAX];
+  uint16_t occ;
+  uint16_t free;
+
   xSemaphoreTake(s_mtx_state, portMAX_DELAY);
-  uint16_t occ = s_occupancy;
+  occ = s_occupancy;
   xSemaphoreGive(s_mtx_state);
-  uint16_t free = free_seats();
+  free = free_seats();
 
   snprintf(msg, sizeof(msg),
            "Current occupancy: %u/%u\r\n"
@@ -213,6 +246,10 @@ static void ctrl_task(void *arg)
     elev_gpio_elevator_set(false);
   }
 }
+
+/*******************************************************************************
+ **************************   GLOBAL FUNCTIONS   *******************************
+ ******************************************************************************/
 
 void elev_ctrl_init(QueueHandle_t req_queue)
 {

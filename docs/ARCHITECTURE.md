@@ -49,3 +49,13 @@ on exit: give seats, then drain waitQ with free seats
 ## VCOM
 
 USART0: PA08 TX, PA09 RX; enable PB00.
+
+## Project slots
+
+| Path | Contents |
+|------|----------|
+| `elevator/` | All hand-written elevator modules |
+| `docs/` | Architecture / design review notes |
+| `config/` | Editable SLC configs |
+| `autogen/` | Studio-generated — never hand-edit |
+| root `app.c` | Thin shim → `elev_app_init()` |

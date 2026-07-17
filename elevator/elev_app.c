@@ -1,6 +1,8 @@
 /***************************************************************************//**
  * @file elev_app.c
- * @brief Create queues/tasks and enable UART RX
+ * @brief Create primitives/tasks, print banner, enable UART RX IRQ
+ *******************************************************************************
+ * Init order matches architecture doc §11.
  ******************************************************************************/
 #include "elev_app.h"
 #include "elev_gpio.h"
@@ -15,14 +17,19 @@
 #include "FreeRTOS.h"
 #include "queue.h"
 
+/*******************************************************************************
+ **************************   GLOBAL FUNCTIONS   *******************************
+ ******************************************************************************/
+
 void elev_app_init(void)
 {
   char banner[96];
+  QueueHandle_t req_q;
 
   elev_gpio_init();
   elev_uart_hw_init();
 
-  QueueHandle_t req_q = xQueueCreate(ELEV_REQ_QUEUE_LEN, sizeof(elev_req_t));
+  req_q = xQueueCreate(ELEV_REQ_QUEUE_LEN, sizeof(elev_req_t));
   configASSERT(req_q != NULL);
 
   elev_tx_init();

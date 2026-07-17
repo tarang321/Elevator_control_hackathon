@@ -1,6 +1,6 @@
 /***************************************************************************//**
  * @file elev_parser.c
- * @brief Parse enter/exit/status/help; enqueue elev_req_t
+ * @brief Parse enter/exit/status/help → reqQ (or TX error)
  ******************************************************************************/
 #include "elev_parser.h"
 #include "elev_rx.h"
@@ -16,15 +16,36 @@
 #include "task.h"
 #include "queue.h"
 
+/*******************************************************************************
+ *******************************   DEFINES   ***********************************
+ ******************************************************************************/
+
 #define ELEV_PARSER_STACK  256
 #define ELEV_PARSER_PRIO   (tskIDLE_PRIORITY + 2)
+
+/*******************************************************************************
+ ***************************   LOCAL VARIABLES   *******************************
+ ******************************************************************************/
 
 static QueueHandle_t s_req_q;
 static TaskHandle_t s_parser_task;
 
+/*******************************************************************************
+ *********************   LOCAL FUNCTION PROTOTYPES   ***************************
+ ******************************************************************************/
+
+static void skip_ws(char **p);
+static bool parse_u16(char **p, uint16_t *out);
+static void send_err(const char *msg);
+static void parser_task(void *arg);
+
+/*******************************************************************************
+ **************************   LOCAL FUNCTIONS   ********************************
+ ******************************************************************************/
+
 static void skip_ws(char **p)
 {
-  while (**p != '\0' && isspace((unsigned char)**p)) {
+  while ((**p != '\0') && isspace((unsigned char)**p)) {
     (*p)++;
   }
 }
@@ -38,8 +59,7 @@ static bool parse_u16(char **p, uint16_t *out)
   if (**p == '\0') {
     return false;
   }
-  if (**p == '-' || **p == '+') {
-    /* Explicit sign: reject negatives; +N allowed if digits follow */
+  if ((**p == '-') || (**p == '+')) {
     if (**p == '-') {
       return false;
     }
@@ -49,13 +69,13 @@ static bool parse_u16(char **p, uint16_t *out)
     return false;
   }
   v = strtol(*p, &end, 10);
-  if (end == *p || v <= 0 || v > 65535) {
+  if ((end == *p) || (v <= 0) || (v > 65535)) {
     return false;
   }
   *p = end;
   skip_ws(p);
   if (**p != '\0') {
-    return false; /* trailing junk */
+    return false;
   }
   *out = (uint16_t)v;
   return true;
@@ -72,11 +92,15 @@ static void parser_task(void *arg)
   (void)arg;
 
   for (;;) {
+    bool overflow = false;
+    uint16_t n;
+    char *p;
+    elev_req_t req;
+
     (void)ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
     elev_gpio_parser_set(true);
 
-    bool overflow = false;
-    uint16_t n = elev_rx_take_command(line, sizeof(line), &overflow);
+    n = elev_rx_take_command(line, sizeof(line), &overflow);
     if (overflow) {
       send_err("Error: command too long.\r\n");
       elev_gpio_parser_set(false);
@@ -87,17 +111,17 @@ static void parser_task(void *arg)
       continue;
     }
 
-    char *p = line;
+    p = line;
     skip_ws(&p);
     if (*p == '\0') {
       elev_gpio_parser_set(false);
       continue;
     }
 
-    elev_req_t req;
     memset(&req, 0, sizeof(req));
 
-    if (strncmp(p, "enter", 5) == 0 && (p[5] == '\0' || isspace((unsigned char)p[5]))) {
+    if ((strncmp(p, "enter", 5) == 0)
+        && ((p[5] == '\0') || isspace((unsigned char)p[5]))) {
       p += 5;
       skip_ws(&p);
       if (*p == '\0') {
@@ -110,7 +134,8 @@ static void parser_task(void *arg)
           send_err("Error: request queue full.\r\n");
         }
       }
-    } else if (strncmp(p, "exit", 4) == 0 && (p[4] == '\0' || isspace((unsigned char)p[4]))) {
+    } else if ((strncmp(p, "exit", 4) == 0)
+               && ((p[4] == '\0') || isspace((unsigned char)p[4]))) {
       p += 4;
       skip_ws(&p);
       if (*p == '\0') {
@@ -123,7 +148,8 @@ static void parser_task(void *arg)
           send_err("Error: request queue full.\r\n");
         }
       }
-    } else if (strncmp(p, "status", 6) == 0 && (p[6] == '\0' || isspace((unsigned char)p[6]))) {
+    } else if ((strncmp(p, "status", 6) == 0)
+               && ((p[6] == '\0') || isspace((unsigned char)p[6]))) {
       p += 6;
       skip_ws(&p);
       if (*p != '\0') {
@@ -134,7 +160,8 @@ static void parser_task(void *arg)
           send_err("Error: request queue full.\r\n");
         }
       }
-    } else if (strncmp(p, "help", 4) == 0 && (p[4] == '\0' || isspace((unsigned char)p[4]))) {
+    } else if ((strncmp(p, "help", 4) == 0)
+               && ((p[4] == '\0') || isspace((unsigned char)p[4]))) {
       p += 4;
       skip_ws(&p);
       if (*p != '\0') {
@@ -152,6 +179,10 @@ static void parser_task(void *arg)
     elev_gpio_parser_set(false);
   }
 }
+
+/*******************************************************************************
+ **************************   GLOBAL FUNCTIONS   *******************************
+ ******************************************************************************/
 
 void elev_parser_init(QueueHandle_t req_queue)
 {

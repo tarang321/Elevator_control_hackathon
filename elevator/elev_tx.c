@@ -1,6 +1,9 @@
 /***************************************************************************//**
  * @file elev_tx.c
- * @brief TX task: serializes echo + responses over USART0 LDMA
+ * @brief TX FreeRTOS task: one LDMA transfer at a time
+ *******************************************************************************
+ * Callers (ISR echo / parser / elevator) only enqueue. This task owns USART0
+ * TXDATA via LDMA; DMA-done callback wakes the task for the next chunk.
  ******************************************************************************/
 #include "elev_tx.h"
 #include "elev_gpio.h"
@@ -19,8 +22,16 @@
 #include "sl_device_dma.h"
 #include "sl_status.h"
 
+/*******************************************************************************
+ *******************************   DEFINES   ***********************************
+ ******************************************************************************/
+
 #define ELEV_TX_TASK_STACK   256
 #define ELEV_TX_TASK_PRIO    (tskIDLE_PRIORITY + 3)
+
+/*******************************************************************************
+ ***************************   LOCAL VARIABLES   *******************************
+ ******************************************************************************/
 
 static QueueHandle_t s_tx_q;
 static TaskHandle_t s_tx_task;
@@ -28,6 +39,21 @@ static sl_dma_channel_handle_t s_dma_tx;
 static uint8_t s_dma_ch;
 static volatile bool s_dma_busy;
 static elev_tx_msg_t s_inflight;
+
+/*******************************************************************************
+ *********************   LOCAL FUNCTION PROTOTYPES   ***************************
+ ******************************************************************************/
+
+static void dma_cb(sl_dma_channel_handle_t *handle,
+                   void *user_data,
+                   bool error,
+                   bool aborted);
+static void start_dma(const elev_tx_msg_t *msg);
+static void tx_task(void *arg);
+
+/*******************************************************************************
+ **************************   LOCAL FUNCTIONS   ********************************
+ ******************************************************************************/
 
 static void dma_cb(sl_dma_channel_handle_t *handle,
                    void *user_data,
@@ -72,32 +98,37 @@ static void start_dma(const elev_tx_msg_t *msg)
 
 static void tx_task(void *arg)
 {
-  (void)arg;
   elev_tx_msg_t msg;
+  (void)arg;
 
   for (;;) {
     if (xQueueReceive(s_tx_q, &msg, portMAX_DELAY) != pdTRUE) {
       continue;
     }
-    if (msg.len == 0U || msg.len > ELEV_TX_MSG_MAX) {
+    if ((msg.len == 0U) || (msg.len > ELEV_TX_MSG_MAX)) {
       continue;
     }
 
     start_dma(&msg);
 
-    /* Wait for DMA done (or immediate fail cleared busy). */
     while (s_dma_busy) {
       (void)ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
     }
   }
 }
 
+/*******************************************************************************
+ **************************   GLOBAL FUNCTIONS   *******************************
+ ******************************************************************************/
+
 void elev_tx_init(void)
 {
+  sl_status_t st;
+
   s_tx_q = xQueueCreate(ELEV_TX_QUEUE_LEN, sizeof(elev_tx_msg_t));
   configASSERT(s_tx_q != NULL);
 
-  sl_status_t st = sl_dma_manager_allocate_channel(NULL, &s_dma_ch);
+  st = sl_dma_manager_allocate_channel(NULL, &s_dma_ch);
   configASSERT(st == SL_STATUS_OK);
 
   st = sl_dma_channel_init(&s_dma_tx, NULL, s_dma_ch, dma_cb, NULL);
@@ -124,7 +155,7 @@ bool elev_tx_enqueue(const uint8_t *data, uint16_t len)
 {
   elev_tx_msg_t msg;
 
-  if (data == NULL || len == 0U || len > ELEV_TX_MSG_MAX) {
+  if ((data == NULL) || (len == 0U) || (len > ELEV_TX_MSG_MAX)) {
     return false;
   }
   msg.len = len;
@@ -134,10 +165,12 @@ bool elev_tx_enqueue(const uint8_t *data, uint16_t len)
 
 bool elev_tx_print(const char *s)
 {
+  size_t n;
+
   if (s == NULL) {
     return false;
   }
-  size_t n = strlen(s);
+  n = strlen(s);
   if (n > ELEV_TX_MSG_MAX) {
     n = ELEV_TX_MSG_MAX;
   }
@@ -147,6 +180,7 @@ bool elev_tx_print(const char *s)
 bool elev_tx_enqueue_echo_from_isr(uint8_t c, BaseType_t *woken)
 {
   elev_tx_msg_t msg;
+
   msg.len = 1U;
   msg.data[0] = c;
   return xQueueSendFromISR(s_tx_q, &msg, woken) == pdTRUE;

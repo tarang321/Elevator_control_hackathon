@@ -19,14 +19,15 @@ package: platform
 quality: production
 readme:
 - path: readme.md
+- path: docs/ARCHITECTURE.md
 source:
 - path: app.c
-- path: elev_app.c
-- path: elev_gpio.c
-- path: elev_tx.c
-- path: elev_rx.c
-- path: elev_parser.c
-- path: elev_ctrl.c
+- path: elevator/elev_app.c
+- path: elevator/elev_gpio.c
+- path: elevator/elev_tx.c
+- path: elevator/elev_rx.c
+- path: elevator/elev_parser.c
+- path: elevator/elev_ctrl.c
 tag:
 - hwfilter:ram:20k
 - hardware:device:ram:20
@@ -34,6 +35,8 @@ include:
 - path: .
   file_list:
   - path: app.h
+- path: elevator
+  file_list:
   - path: elev_app.h
   - path: elev_types.h
   - path: elev_gpio.h
@@ -41,7 +44,6 @@ include:
   - path: elev_rx.h
   - path: elev_parser.h
   - path: elev_ctrl.h
-  - path: ARCHITECTURE.md
 sdk:
   vendor: silabs
   id: simplicity_sdk

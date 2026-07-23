@@ -48,7 +48,7 @@ sequenceDiagram
   P->>K: kick if idle
   K->>D: M2P contiguous span to TXDATA
   D-->>K: dma_cb
-  Note over K: clear busy; do NOT submit in callback
+  Note over K: clear busy - do NOT submit in callback
   K->>T: PendFunctionCall if ring not empty
   T->>K: try_start_dma again
 ```

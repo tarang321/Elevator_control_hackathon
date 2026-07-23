@@ -15,6 +15,7 @@
 #include "em_core.h"
 
 #include "FreeRTOS.h"
+#include "timers.h"
 
 #include "sl_dma_manager.h"
 #include "sl_dma_channel.h"
@@ -51,6 +52,7 @@ static uint16_t ring_used(void);
 static uint16_t ring_free(void);
 static bool ring_write(const uint8_t *data, uint16_t len);
 static void try_start_dma(void);
+static void pend_try_start_dma(void *arg1, uint32_t arg2);
 static void dma_cb(sl_dma_channel_handle_t *handle,
                    void *user_data,
                    bool error,
@@ -139,11 +141,20 @@ static void try_start_dma(void)
   }
 }
 
+static void pend_try_start_dma(void *arg1, uint32_t arg2)
+{
+  (void)arg1;
+  (void)arg2;
+  try_start_dma();
+}
+
 static void dma_cb(sl_dma_channel_handle_t *handle,
                    void *user_data,
                    bool error,
                    bool aborted)
 {
+  BaseType_t woken = pdFALSE;
+  uint16_t used_after;
   (void)handle;
   (void)user_data;
   (void)error;
@@ -157,9 +168,18 @@ static void dma_cb(sl_dma_channel_handle_t *handle,
   s_head = (uint16_t)((s_head + s_dma_len) & ELEV_TX_RING_MASK);
   s_dma_len = 0U;
   s_dma_busy = false;
+  used_after = ring_used();
   CORE_EXIT_ATOMIC();
 
-  try_start_dma();
+  /*
+   * Do not submit the next LDMA transfer from inside this callback — the
+   * channel can still be finishing cleanup, which left TX stuck busy after
+   * the first chunk. Defer the kick to the timer daemon task.
+   */
+  if (used_after > 0U) {
+    (void)xTimerPendFunctionCallFromISR(pend_try_start_dma, NULL, 0, &woken);
+    portYIELD_FROM_ISR(woken);
+  }
 }
 
 /*******************************************************************************

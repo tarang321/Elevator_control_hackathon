@@ -120,3 +120,8 @@
 520	1752	8065252953075294	CMakeFiles/slc.dir/base/C_/Users/tasrivas/SimplicityStudio/v6_workspace/Elevator_capacity_controller/elevator/elev_tx.c.obj	48f72c80b962df92
 544	1848	8065252953376349	CMakeFiles/slc.dir/base/C_/Users/tasrivas/SimplicityStudio/v6_workspace/Elevator_capacity_controller/elevator/elev_rx.c.obj	fe363ff76014106a
 1848	5318	8065252966424751	base/Elevator_capacity_controller.out	938a1d3dd7250789
+19	589	8065262327507590	CMakeFiles/slc.dir/base/C_/Users/tasrivas/SimplicityStudio/v6_workspace/Elevator_capacity_controller/elevator/elev_tx.c.obj	48f72c80b962df92
+43	650	8065262327762200	CMakeFiles/slc.dir/base/C_/Users/tasrivas/SimplicityStudio/v6_workspace/Elevator_capacity_controller/elevator/elev_ctrl.c.obj	e0d91cfa9d169bd6
+650	2803	8065262333838958	base/Elevator_capacity_controller.out	938a1d3dd7250789
+23	626	8065262567407752	CMakeFiles/slc.dir/base/C_/Users/tasrivas/SimplicityStudio/v6_workspace/Elevator_capacity_controller/elevator/elev_ctrl.c.obj	e0d91cfa9d169bd6
+627	2619	8065262573436913	base/Elevator_capacity_controller.out	938a1d3dd7250789

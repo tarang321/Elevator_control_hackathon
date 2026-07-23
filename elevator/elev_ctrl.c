@@ -111,11 +111,8 @@ static void board_passengers(uint16_t n)
   if (board > 0U) {
     claim_seats(board);
     snprintf(msg, sizeof(msg),
-             "Entry allowed: %u passenger(s) entered.\r\n"
-             "Current occupancy: %u/%u\r\n",
-             (unsigned)board,
-             (unsigned)s_occupancy,
-             (unsigned)s_capacity);
+             "Entry allowed: %u passenger(s) entered.\r\n",
+             (unsigned)board);
     elev_tx_print(msg);
   }
 
@@ -137,6 +134,7 @@ static void board_passengers(uint16_t n)
     }
   }
   refresh_leds();
+  handle_status();
 }
 
 static void drain_wait_queue(void)
@@ -242,17 +240,16 @@ static void handle_exit(uint16_t n)
 
   xSemaphoreTake(s_mtx_state, portMAX_DELAY);
   s_occupancy = (uint16_t)(s_occupancy - n);
-  occ = s_occupancy;
   s_stat_exited += n;
   xSemaphoreGive(s_mtx_state);
 
   snprintf(msg, sizeof(msg),
-           "Exit processed: %u passenger(s) exited.\r\n"
-           "Current occupancy: %u/%u\r\n",
-           (unsigned)n, (unsigned)occ, (unsigned)s_capacity);
+           "Exit processed: %u passenger(s) exited.\r\n",
+           (unsigned)n);
   elev_tx_print(msg);
 
   drain_wait_queue();
+  handle_status();
 }
 
 static void handle_status(void)
@@ -348,11 +345,11 @@ static void handle_capacity(uint16_t new_cap)
   xSemaphoreGive(s_mtx_state);
 
   snprintf(msg, sizeof(msg),
-           "Capacity set to %u.\r\n"
-           "Current occupancy: %u/%u\r\n",
-           (unsigned)new_cap, (unsigned)occ, (unsigned)new_cap);
+           "Capacity set to %u.\r\n",
+           (unsigned)new_cap);
   elev_tx_print(msg);
   refresh_leds();
+  handle_status();
 }
 
 static void handle_tick(void)

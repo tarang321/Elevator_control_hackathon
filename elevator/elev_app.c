@@ -2,7 +2,8 @@
  * @file elev_app.c
  * @brief Create primitives/tasks, timers, banner, enable UART RX IRQ
  *******************************************************************************
- * Init order matches architecture doc. Optional: status timer, button → exit 1.
+ * Init order matches architecture doc. Button → enter/exit 1. Status prints
+ * only on update or explicit CLI `status` (no periodic timer).
  ******************************************************************************/
 #include "elev_app.h"
 #include "elev_gpio.h"
@@ -24,14 +25,12 @@
 
 static QueueHandle_t s_req_q;
 static TimerHandle_t s_btn_tmr;
-static TimerHandle_t s_status_tmr;
 
 /*******************************************************************************
  *********************   LOCAL FUNCTION PROTOTYPES   ***************************
  ******************************************************************************/
 
 static void btn_timer_cb(TimerHandle_t tmr);
-static void status_timer_cb(TimerHandle_t tmr);
 
 /*******************************************************************************
  **************************   LOCAL FUNCTIONS   ********************************
@@ -55,16 +54,6 @@ static void btn_timer_cb(TimerHandle_t tmr)
   }
 }
 
-static void status_timer_cb(TimerHandle_t tmr)
-{
-  elev_req_t req;
-  (void)tmr;
-
-  req.type = ELEV_REQ_STATUS;
-  req.count = 0;
-  (void)xQueueSend(s_req_q, &req, 0);
-}
-
 /*******************************************************************************
  **************************   GLOBAL FUNCTIONS   *******************************
  ******************************************************************************/
@@ -86,7 +75,6 @@ void elev_app_init(void)
   elev_parser_start_task();
   elev_rx_init(elev_parser_task_handle());
   elev_ctrl_start_task();
-  elev_tx_start_task();
 
   s_btn_tmr = xTimerCreate("elev_btn",
                            pdMS_TO_TICKS(ELEV_APP_TICK_MS),
@@ -95,14 +83,6 @@ void elev_app_init(void)
                            btn_timer_cb);
   configASSERT(s_btn_tmr != NULL);
   (void)xTimerStart(s_btn_tmr, 0);
-
-  s_status_tmr = xTimerCreate("elev_stat",
-                              pdMS_TO_TICKS(ELEV_STATUS_PERIOD_MS),
-                              pdTRUE,
-                              NULL,
-                              status_timer_cb);
-  configASSERT(s_status_tmr != NULL);
-  (void)xTimerStart(s_status_tmr, 0);
 
   snprintf(banner, sizeof(banner),
            "\r\nElevator Capacity Controller Demo\r\n"

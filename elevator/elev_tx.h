@@ -1,8 +1,8 @@
 /***************************************************************************//**
  * @file elev_tx.h
- * @brief UART TX service — sole LDMA owner (echo + responses)
+ * @brief UART TX service — byte ring + LDMA (echo + responses)
  *******************************************************************************
- * Slot: elevator/ — PDF §6 / §7 serialization.
+ * Slot: elevator/ — producers write the ring; DMA-done IRQ refills.
  ******************************************************************************/
 #ifndef ELEV_TX_H
 #define ELEV_TX_H
@@ -23,7 +23,6 @@ extern "C" {
  ******************************************************************************/
 
 void elev_tx_init(void);
-void elev_tx_start_task(void);
 
 bool elev_tx_enqueue(const uint8_t *data, uint16_t len);
 bool elev_tx_print(const char *s);

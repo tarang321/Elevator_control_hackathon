@@ -1,9 +1,9 @@
 /***************************************************************************//**
  * @file elev_tx.c
- * @brief TX FreeRTOS task: one LDMA transfer at a time
+ * @brief UART TX byte ring drained by LDMA (no FreeRTOS TX task)
  *******************************************************************************
- * Callers (ISR echo / parser / elevator) only enqueue. This task owns USART0
- * TXDATA via LDMA; DMA-done callback wakes the task for the next chunk.
+ * Callers write the ring. If DMA is idle, kick M2P. DMA-done advances head and
+ * starts the next contiguous span (handles wrap in a second transfer).
  ******************************************************************************/
 #include "elev_tx.h"
 #include "elev_gpio.h"
@@ -12,10 +12,9 @@
 
 #include "em_usart.h"
 #include "em_device.h"
+#include "em_core.h"
 
 #include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
 
 #include "sl_dma_manager.h"
 #include "sl_dma_channel.h"
@@ -26,41 +25,125 @@
  *******************************   DEFINES   ***********************************
  ******************************************************************************/
 
-#define ELEV_TX_TASK_STACK   256
-#define ELEV_TX_TASK_PRIO    (tskIDLE_PRIORITY + 3)
+#if (ELEV_TX_RING_SIZE & (ELEV_TX_RING_SIZE - 1U)) != 0U
+#error ELEV_TX_RING_SIZE must be a power of 2
+#endif
+
+#define ELEV_TX_RING_MASK   (ELEV_TX_RING_SIZE - 1U)
 
 /*******************************************************************************
  ***************************   LOCAL VARIABLES   *******************************
  ******************************************************************************/
 
-static QueueHandle_t s_tx_q;
-static TaskHandle_t s_tx_task;
+static uint8_t s_ring[ELEV_TX_RING_SIZE];
+static volatile uint16_t s_head;
+static volatile uint16_t s_tail;
 static sl_dma_channel_handle_t s_dma_tx;
 static uint8_t s_dma_ch;
 static volatile bool s_dma_busy;
-static elev_tx_msg_t s_inflight;
+static volatile uint16_t s_dma_len;
 
 /*******************************************************************************
  *********************   LOCAL FUNCTION PROTOTYPES   ***************************
  ******************************************************************************/
 
+static uint16_t ring_used(void);
+static uint16_t ring_free(void);
+static bool ring_write(const uint8_t *data, uint16_t len);
+static void try_start_dma(void);
 static void dma_cb(sl_dma_channel_handle_t *handle,
                    void *user_data,
                    bool error,
                    bool aborted);
-static void start_dma(const elev_tx_msg_t *msg);
-static void tx_task(void *arg);
 
 /*******************************************************************************
  **************************   LOCAL FUNCTIONS   ********************************
  ******************************************************************************/
+
+static uint16_t ring_used(void)
+{
+  return (uint16_t)((s_tail - s_head) & ELEV_TX_RING_MASK);
+}
+
+static uint16_t ring_free(void)
+{
+  /* Leave one slot empty so head==tail means empty. */
+  return (uint16_t)((ELEV_TX_RING_SIZE - 1U) - ring_used());
+}
+
+static bool ring_write(const uint8_t *data, uint16_t len)
+{
+  uint16_t i;
+
+  if ((data == NULL) || (len == 0U)) {
+    return false;
+  }
+  if (len > ring_free()) {
+    return false;
+  }
+
+  for (i = 0U; i < len; i++) {
+    s_ring[s_tail] = data[i];
+    s_tail = (uint16_t)((s_tail + 1U) & ELEV_TX_RING_MASK);
+  }
+  return true;
+}
+
+static void try_start_dma(void)
+{
+  uint16_t used;
+  uint16_t head;
+  uint16_t contig;
+  sl_status_t st;
+
+  CORE_DECLARE_IRQ_STATE;
+  CORE_ENTER_ATOMIC();
+
+  if (s_dma_busy) {
+    CORE_EXIT_ATOMIC();
+    return;
+  }
+
+  used = ring_used();
+  if (used == 0U) {
+    CORE_EXIT_ATOMIC();
+    return;
+  }
+
+  head = s_head;
+  contig = (uint16_t)(ELEV_TX_RING_SIZE - head);
+  if (contig > used) {
+    contig = used;
+  }
+
+  s_dma_len = contig;
+  s_dma_busy = true;
+  CORE_EXIT_ATOMIC();
+
+  elev_gpio_dma_active_set(true);
+
+  st = sl_dma_channel_submit_transfer_m2p(
+    &s_dma_tx,
+    (void *)&s_ring[head],
+    (void *)&USART0->TXDATA,
+    (size_t)contig,
+    SL_DMA_CTRL_SIZE_BYTE,
+    NULL);
+
+  if (st != SL_STATUS_OK) {
+    elev_gpio_dma_active_set(false);
+    CORE_ENTER_ATOMIC();
+    s_dma_busy = false;
+    s_dma_len = 0U;
+    CORE_EXIT_ATOMIC();
+  }
+}
 
 static void dma_cb(sl_dma_channel_handle_t *handle,
                    void *user_data,
                    bool error,
                    bool aborted)
 {
-  BaseType_t woken = pdFALSE;
   (void)handle;
   (void)user_data;
   (void)error;
@@ -68,53 +151,15 @@ static void dma_cb(sl_dma_channel_handle_t *handle,
 
   elev_gpio_dma_active_set(false);
   elev_gpio_dma_complete_pulse();
+
+  CORE_DECLARE_IRQ_STATE;
+  CORE_ENTER_ATOMIC();
+  s_head = (uint16_t)((s_head + s_dma_len) & ELEV_TX_RING_MASK);
+  s_dma_len = 0U;
   s_dma_busy = false;
+  CORE_EXIT_ATOMIC();
 
-  if (s_tx_task != NULL) {
-    vTaskNotifyGiveFromISR(s_tx_task, &woken);
-    portYIELD_FROM_ISR(woken);
-  }
-}
-
-static void start_dma(const elev_tx_msg_t *msg)
-{
-  s_inflight = *msg;
-  s_dma_busy = true;
-  elev_gpio_dma_active_set(true);
-
-  sl_status_t st = sl_dma_channel_submit_transfer_m2p(
-    &s_dma_tx,
-    (void *)s_inflight.data,
-    (void *)&USART0->TXDATA,
-    (size_t)s_inflight.len,
-    SL_DMA_CTRL_SIZE_BYTE,
-    NULL);
-
-  if (st != SL_STATUS_OK) {
-    elev_gpio_dma_active_set(false);
-    s_dma_busy = false;
-  }
-}
-
-static void tx_task(void *arg)
-{
-  elev_tx_msg_t msg;
-  (void)arg;
-
-  for (;;) {
-    if (xQueueReceive(s_tx_q, &msg, portMAX_DELAY) != pdTRUE) {
-      continue;
-    }
-    if ((msg.len == 0U) || (msg.len > ELEV_TX_MSG_MAX)) {
-      continue;
-    }
-
-    start_dma(&msg);
-
-    while (s_dma_busy) {
-      (void)ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
-    }
-  }
+  try_start_dma();
 }
 
 /*******************************************************************************
@@ -125,8 +170,10 @@ void elev_tx_init(void)
 {
   sl_status_t st;
 
-  s_tx_q = xQueueCreate(ELEV_TX_QUEUE_LEN, sizeof(elev_tx_msg_t));
-  configASSERT(s_tx_q != NULL);
+  s_head = 0U;
+  s_tail = 0U;
+  s_dma_busy = false;
+  s_dma_len = 0U;
 
   st = sl_dma_manager_allocate_channel(NULL, &s_dma_ch);
   configASSERT(st == SL_STATUS_OK);
@@ -136,31 +183,21 @@ void elev_tx_init(void)
 
   st = sl_dma_channel_set_peripheral_signal(&s_dma_tx, SL_DMA_SIGNAL_USART0_TXBL);
   configASSERT(st == SL_STATUS_OK);
-
-  s_dma_busy = false;
-}
-
-void elev_tx_start_task(void)
-{
-  BaseType_t ok = xTaskCreate(tx_task,
-                              "elev_tx",
-                              ELEV_TX_TASK_STACK,
-                              NULL,
-                              ELEV_TX_TASK_PRIO,
-                              &s_tx_task);
-  configASSERT(ok == pdPASS);
 }
 
 bool elev_tx_enqueue(const uint8_t *data, uint16_t len)
 {
-  elev_tx_msg_t msg;
+  bool ok;
 
-  if ((data == NULL) || (len == 0U) || (len > ELEV_TX_MSG_MAX)) {
-    return false;
+  CORE_DECLARE_IRQ_STATE;
+  CORE_ENTER_ATOMIC();
+  ok = ring_write(data, len);
+  CORE_EXIT_ATOMIC();
+
+  if (ok) {
+    try_start_dma();
   }
-  msg.len = len;
-  memcpy(msg.data, data, len);
-  return xQueueSend(s_tx_q, &msg, pdMS_TO_TICKS(50)) == pdTRUE;
+  return ok;
 }
 
 bool elev_tx_print(const char *s)
@@ -179,9 +216,19 @@ bool elev_tx_print(const char *s)
 
 bool elev_tx_enqueue_echo_from_isr(uint8_t c, BaseType_t *woken)
 {
-  elev_tx_msg_t msg;
+  bool ok;
 
-  msg.len = 1U;
-  msg.data[0] = c;
-  return xQueueSendFromISR(s_tx_q, &msg, woken) == pdTRUE;
+  if (woken != NULL) {
+    *woken = pdFALSE;
+  }
+
+  CORE_DECLARE_IRQ_STATE;
+  CORE_ENTER_ATOMIC();
+  ok = ring_write(&c, 1U);
+  CORE_EXIT_ATOMIC();
+
+  if (ok) {
+    try_start_dma();
+  }
+  return ok;
 }

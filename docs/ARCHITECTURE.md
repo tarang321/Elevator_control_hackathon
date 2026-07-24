@@ -16,7 +16,7 @@ flowchart TB
   ReqQ --> Ctrl[elev_ctrl task]
   Ctrl -->|event + status once| Ring[TX byte ring 512B]
   RX -->|echo 1-3 bytes| Ring
-  Ring -->|try_start if idle| LDMA[LDMA M2P USART0 TXBL]
+  Ring -->|try_start if idle| LDMA
   LDMA -->|dma_cb advance head| Pend[xTimerPendFunctionCall]
   Pend -->|try_start_dma| LDMA
   LDMA --> USART0[USART0 TX / VCOM]
